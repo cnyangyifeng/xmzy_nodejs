@@ -5,12 +5,6 @@
   padding: 160rpx 80rpx;
 }
 
-.logo {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 50%;
-}
-
 .page__desc {
   flex: 1;
   margin: 80rpx 0 20rpx 0;
@@ -19,13 +13,13 @@
   text-align: center;
 }
 
-.login-btn {
-  width: 60%;
-}
-
 .vouchers-count {
   margin: 0 10rpx;
   color: #e64340;
   font-size: 18px;
   font-weight: 600;
+}
+
+.unlogged {
+  color: #666;
 }

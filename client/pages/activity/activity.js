@@ -48,8 +48,6 @@ Page({
     wx.setNavigationBarTitle({
       title: `12.31 语文作业`
     })
-    // 获取微信授权: scope.record
-    this.authRecordScope()
   },
 
   /**
@@ -70,6 +68,8 @@ Page({
       .then(this.showImageDataByActivityIdAndSerialNumber)
       // 显示当前 Activity 相关的全部 Xmessages
       .then(this.showXmessagesByActivityId)
+      // 获取微信授权: scope.record
+      .then(this.authRecordScope)
   },
 
   /**
@@ -392,7 +392,7 @@ Page({
         },
         // 请求失败
         fail: err => {
-          console.log(`获取作业数量失败: ${JSON.stringify(error)}`)
+          console.log(`获取作业数量失败: ${JSON.stringify(err)}`)
           // 重置页面数据 assignmentsCount 为 0
           this.setData({
             assignmentsCount: 0
@@ -446,7 +446,7 @@ Page({
         },
         // 请求失败
         fail: err => {
-          console.log(`获取作业失败: ${JSON.stringify(error)}`)
+          console.log(`获取作业失败: ${JSON.stringify(err)}`)
           // 隐藏 loading 提示框
           wx.hideLoading()
           // 操作失败
@@ -486,7 +486,7 @@ Page({
         },
         // 请求失败
         fail: err => {
-          console.log(`获取消息失败: ${JSON.stringify(error)}`)
+          console.log(`获取消息失败: ${JSON.stringify(err)}`)
           // 隐藏 loading 提示框
           wx.hideLoading()
           // 操作失败

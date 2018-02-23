@@ -64,7 +64,7 @@ var ensureLoggedIn = function () {
           // 隐藏 loading 提示框
           wx.hideLoading()
           // 显示 “登录失败” 弹窗
-          switch (error.type) {
+          switch (err.type) {
             // 获取用户信息失败，则显示 “获取用户信息失败” 弹窗
             case qcloud.ERR_WX_GET_USER_INFO:
               wx.showModal({
@@ -88,7 +88,7 @@ var ensureLoggedIn = function () {
               })
           }
           // 操作失败
-          reject()
+          // reject()
         }
       })
     }

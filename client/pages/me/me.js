@@ -20,45 +20,86 @@ Page({
 
   onShow: function () {
     if (!this.data.userInfo) {
-      this.updateUserInfo()
+      // 从本地缓存中读取 userInfo，更新页面数据 userInfo
+      this.setData({
+        userInfo: UserInfo.get()
+      })
     }
   },
 
   /**
-   * 绑定事件：点击登录按钮
+   * 绑定事件：点击 Unlogged Cell
    */
 
-  loginButtonTap: function () {
+  unloggedCellTap: function () {
     loginService.ensureLoggedIn().then(
-      this.updateUserInfo,
-      this.loginFail
+      () => {
+        // 从本地缓存中读取 userInfo，更新页面数据 userInfo
+        this.setData({
+          userInfo: UserInfo.get()
+        })
+      }
     )
   },
 
   /**
-   * 绑定事件：点击 “设置” 菜单
+   * 绑定事件：点击 UserInfo Cell
    */
 
-  setupCellTap: function () {
-    wx.openSetting()
+  userInfoCellTap: function () {
+    console.log(`userInfo cell tap`)
   },
 
   /**
-   * 更新页面数据 userInfo
+   * 绑定事件：点击 Reviews Cell
    */
 
-  updateUserInfo: function () {
-    this.setData({
-      userInfo: UserInfo.get()
+  reviewsCellTap: function () {
+    console.log(`reviews cell tap`)
+    loginService.ensureLoggedIn().then(
+      () => {
+        wx.navigateTo({
+          url: `../../packages/my/pages/reviews/reviews`
+        })
+      }
+    )
+  },
+
+  /**
+   * 绑定事件：点击 ServicePlans Cell
+   */
+
+  servicePlansCellTap: function () {
+    console.log(`servicePlans cell tap`)
+    loginService.ensureLoggedIn().then(
+      () => {
+        wx.navigateTo({
+          url: `../../packages/my/pages/servicePlans/servicePlans`
+        })
+      }
+    )
+  },
+
+  /**
+   * 绑定事件：点击 CC Cell
+   */
+
+  ccCellTap: function () {
+    console.log(`cc cell tap`)
+    wx.clearStorageSync()
+    wx.showToast({
+      title: 'Clear Storage',
+      duration: 2000
     })
   },
 
   /**
-   * 处理登录失败
+   * 绑定事件：点击 Setup Cell
    */
 
-  loginFail: function () {
-    console.log(msgs.login_fail_title)
+  setupCellTap: function () {
+    console.log(`setup cell tap`)
+    wx.openSetting()
   }
 
 })

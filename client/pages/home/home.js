@@ -48,8 +48,7 @@ Page({
     console.log(`grid cell tap`)
     const disciplineId = e.currentTarget.dataset.disciplineId
     loginService.ensureLoggedIn().then(
-      () => this.requestActivity(disciplineId),
-      this.loginFail
+      () => this.requestActivity(disciplineId)
     )
   },
 
@@ -96,13 +95,6 @@ Page({
         })
       }
     })
-  },
-
-  /**
-   * 处理登录失败
-   */
-
-  loginFail: function () {
   }
 
 })
