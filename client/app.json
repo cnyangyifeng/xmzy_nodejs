@@ -3,13 +3,13 @@
     "pages/home/home",
     "pages/me/me",
     "pages/waitingRoom/waitingRoom",
-    "pages/activity/activity"
+    "pages/activity/activity",
+    "pages/reviews/reviews"
   ],
   "subPackages": [
     {
       "root": "packages/my",
       "pages": [
-        "pages/reviews/reviews",
         "pages/servicePlans/servicePlans"
       ]
     }

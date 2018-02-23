@@ -59,7 +59,7 @@ Page({
     loginService.ensureLoggedIn().then(
       () => {
         wx.navigateTo({
-          url: `../../packages/my/pages/reviews/reviews`
+          url: `../../pages/reviews/reviews`
         })
       }
     )
@@ -89,7 +89,8 @@ Page({
     wx.clearStorageSync()
     wx.showToast({
       title: 'Clear Storage',
-      image: '/assets/images/fail.png'
+      image: '/assets/images/fail.png',
+      mask: true
     })
   },
 

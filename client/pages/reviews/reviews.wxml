@@ -8,13 +8,13 @@
         <view class="weui-panel__hd">{{item.date}}</view>
         <view class="weui-panel__bd">
           <block wx:for="{{item.records}}" wx:key="id">
-            <navigator url="/pages/activity/activity?id={{item.activityId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-activity-id="{{item.activityId}}" bindtap="activityCellTap">
               <view class="weui-cell__hd">
-                <image class="weui-cell__hd_icon" src="/assets/images/{{item.discipline.id}}.svg"></image>
+                <image class="weui-cell__hd_icon" src="../../assets/images/{{item.discipline.id}}.svg"></image>
               </view>
               <view class="weui-cell__bd">{{item.discipline.name}}</view>
               <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </navigator>
+            </view>
           </block>
         </view>
       </view>
