@@ -2,6 +2,7 @@ const configs = require('../../config')
 const loginService = require('../../services/loginService')
 const msgs = require('../../msg')
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
+const UserInfo = require('../../services/userInfo')
 
 Page({
 
@@ -37,7 +38,21 @@ Page({
     }, {
       id: 'geography',
       name: '地理'
-    }]
+    }],
+    userInfo: null, // 用户信息
+  },
+
+  /**
+   * 监听页面显示
+   */
+
+  onShow: function () {
+    if (!this.data.userInfo) {
+      // 从本地缓存中读取 userInfo，更新页面数据 userInfo
+      this.setData({
+        userInfo: UserInfo.get()
+      })
+    }
   },
 
   /**

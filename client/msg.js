@@ -7,12 +7,14 @@ const msgs = {
   confirm_exit_classroom_title: `离开教室`,
   confirm_exit_classroom_content: `确定要离开吗？你随时可以回来。`,
 
-  contact_us_to_report_bugs: `请进入 “客服” 菜单，联系 “熊猫作业小秘书” 解决本次产品故障。`,
+  contact_us_to_report_bugs: `请联系客服人员解决本次产品故障。`,
 
   enter_classroom_fail_title: `进入教室失败`,
-  enter_classroom_processing_title: `准备教室中`,
+  enter_classroom_processing_title: `准备教室`,
 
   loading_title: `正在加载`,
+  loading_assignment_title: `加载作业`,
+  loading_xmessages_title: `加载消息`,
 
   login_fail_title: `登录失败`,
   login_processing_title: `正在登录`,
@@ -25,8 +27,11 @@ const msgs = {
   send_xmessage_fail_title: `发送消息失败`,
   send_xmessage_processing_title: `发送消息`,
 
-  upload_fail_title: `上传失败`,
-  upload_processing_title: `正在上传`
+  send_assignment_fail_title: `发送作业失败`,
+  send_assignment_processing_title: `发送作业`,
+
+  // upload_fail_title: `上传失败`,
+  // upload_processing_title: `正在上传`
 
 }
 

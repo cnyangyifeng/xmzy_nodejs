@@ -89,7 +89,7 @@ Page({
     wx.clearStorageSync()
     wx.showToast({
       title: 'Clear Storage',
-      duration: 2000
+      image: '/assets/images/fail.png'
     })
   },
 

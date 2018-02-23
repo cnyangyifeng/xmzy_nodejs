@@ -1,6 +1,13 @@
 <view class="page">
   <view class="page__hd_inverse">
-    <text class="page__desc_inverse">甄选全国优秀教师\n中小学家庭作业同步辅导\n每晚 6:00 - 10:00\n不见不散</text>
+    <!-- <text class="page__desc_inverse">甄选全国优秀教师\n中小学家庭作业同步辅导\n每晚 6:00 - 10:00\n不见不散</text> -->
+    <block wx:if="{{userInfo}}">
+      <image class="logo" src="{{userInfo.avatarUrl}}"></image>
+    </block>
+    <block wx:else>
+      <image class="logo" src="../../assets/images/logo.jpg"></image>
+    </block>
+    <text class="page__desc_inverse">中小学家庭作业同步批改</text>
   </view>
   <view class="page__bd">
     <view class="weui-grids">

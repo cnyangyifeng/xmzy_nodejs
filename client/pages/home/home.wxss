@@ -1,0 +1,6 @@
+.logo {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 64rpx;
+  border-radius: 50%;
+}

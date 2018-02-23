@@ -415,7 +415,7 @@ Page({
     return new Promise((resolve, reject) => {
       // 显示 loading 提示框
       wx.showLoading({
-        title: msgs.loading_title,
+        title: msgs.loading_assignment_title,
         mask: true
       })
       // 获取 Image Data
@@ -465,7 +465,7 @@ Page({
     return new Promise((resolve, reject) => {
       // 显示 loading 提示框
       wx.showLoading({
-        title: msgs.loading_title,
+        title: msgs.loading_xmessages_title,
         mask: true
       })
       // 获取 Xmessages
@@ -505,7 +505,7 @@ Page({
     return new Promise((resolve, reject) => {
       // 显示 loading 提示框
       wx.showLoading({
-        title: msgs.upload_processing_title,
+        title: msgs.send_assignment_processing_title,
         mask: true
       })
       wx.uploadFile({
@@ -522,14 +522,9 @@ Page({
         fail: err => {
           // 隐藏 loading 提示框
           wx.hideLoading()
-          // 请求失败，则显示 “上传失败” 弹框
-          // wx.showModal({
-          //   title: msgs.upload_fail_title,
-          //   content: msgs.contact_us_to_report_bugs,
-          //   showCancel: false
-          // })
+          // 请求失败，则显示 “发送作业失败” 弹框
           wx.showToast({
-            title: msgs.upload_fail_title,
+            title: msgs.send_assignment_fail_title,
             image: '/assets/images/fail.png'
           })
           // 操作失败
@@ -583,10 +578,9 @@ Page({
           // 隐藏 loading 提示框
           wx.hideLoading()
           // 请求失败，则显示 “发送消息失败” 弹框
-          wx.showModal({
+          wx.showToast({
             title: msgs.msgs.send_xmessage_fail_title,
-            content: msgs.contact_us_to_report_bugs,
-            showCancel: false
+            image: '/assets/images/fail.png'
           })
           // 操作失败
           reject()

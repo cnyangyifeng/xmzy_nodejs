@@ -17,6 +17,9 @@ page {
 
 .page__hd_inverse {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 80rpx;
   background-color: #22292c;
 }
