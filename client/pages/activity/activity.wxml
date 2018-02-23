@@ -1,0 +1,44 @@
+<view class="activity-page">
+  <view class="activity-page__rt">
+    <view class="sidebar">
+      <view class="sidebar-avatar">
+        <image class="sidebar-avatar-image" src="{{tutorInfo.avatarUrl}}"></image>
+      </view>
+      <view class="sidebar-avatar">
+        <image class="sidebar-avatar-image" src="{{studentInfo.avatarUrl}}"></image>
+      </view>
+    </view>
+    <view class="sidebar-heading">消息列表</view>
+    <scroll-view scroll-y class="xmessage-list">
+      <block wx:for="{{xmessages}}" wx:key="xmessage_id">
+        <view class="xmessage" bindtap="xmessageViewTap">
+          <!--{{item.vid + 1}}-->
+          <image class="avatar-image" src="{{studentInfo.avatarUrl}}"></image>
+          <view class="audio-subfix">16"</view>
+        </view>
+      </block>
+    </scroll-view>
+    <view class="sidebar bottom">
+      <view class="sidebar-btn" bindtap="closeButtonTap">
+        <image class="sidebar-btn-image" src="../../assets/images/close.svg"></image>
+      </view>
+      <button class="sidebar-btn share-btn-fix" open-type="share">
+        <image class="sidebar-btn-image" src="../../assets/images/send.svg"></image>
+      </button>
+    </view>
+  </view>
+  <view class="activity-page__lf">
+    <view class="workspace">
+      <canvas class="workspace-layer" id="image-canvas" canvas-id="imageCanvas" disable-scroll bindtouchstart="imageCanvasTouchStart" bindtouchmove="imageCanvasTouchMove" bindtouchend="imageCanvasTouchEnd"></canvas>
+    </view>
+    <view class="toolbar">
+      <view class="toolbar-btn left" bindtap="chooseImageButtonTap">
+        <image class="toolbar-btn-image" src="../../assets/images/camera_fill.svg"></image>
+      </view>
+      <view class="toolbar-btn left" bindtap="galleryButtonTap">
+        <image class="toolbar-btn-image" src="../../assets/images/manage_fill.svg"></image>
+      </view>
+      <button class="weui-btn speak-btn" bindtouchstart="speakButtonTouchStart" bindtouchend="speakButtonTouchEnd">{{speakButtonText}}</button>
+    </view>
+  </view>
+</view>

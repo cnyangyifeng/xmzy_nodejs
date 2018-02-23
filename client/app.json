@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/me/me",
+    "pages/waitingRoom/waitingRoom",
+    "pages/activity/activity"
+  ],
+  "subPackages": [
+    {
+      "root": "packages/my",
+      "pages": [
+        "pages/reviews/reviews",
+        "pages/servicePlans/servicePlans"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#22292c",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "熊猫作业",
+    "backgroundColor": "#efeff4",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "color": "#7f8389",
+    "selectedColor": "#09bb07",
+    "backgroundColor": "#f8f8fa",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "辅导",
+        "iconPath": "assets/images/home.png",
+        "selectedIconPath": "assets/images/home_fill.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我",
+        "iconPath": "assets/images/me.png",
+        "selectedIconPath": "assets/images/me_fill.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false
+}

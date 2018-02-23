@@ -1,0 +1,101 @@
+@import 'assets/styles/weui.wxss';
+
+page {
+  margin: 0;
+  background-color: #efeff4;
+  font-size: 32rpx;
+  font-family: -apple-system-font, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+/* page__hd */
+
+.page__hd {
+  display: flex;
+  padding: 80rpx;
+}
+
+.page__hd_inverse {
+  display: flex;
+  padding: 80rpx;
+  background-color: #22292c;
+}
+
+.page__title {
+  font-size: 40rpx;
+}
+
+.page__desc {
+  flex: 1;
+  margin: 10rpx 0 40rpx 0;
+  color: #999;
+  font-size: 36rpx;
+  text-align: center;
+}
+
+.page__desc_inverse {
+  flex: 1;
+  margin: 10rpx 0 40rpx 0;
+  color: #fff;
+  font-size: 36rpx;
+  text-align: center;
+}
+
+/* page__bd */
+
+.page__bd {
+  padding-bottom: 80rpx;
+}
+
+.page__bd_spacing {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+/* page__ft */
+
+.page__ft {
+  padding-bottom: 20rpx;
+  text-align: center;
+}
+
+/* weui-grid */
+
+.weui-grid {
+  background-color: #fff;
+  border-right: 1px solid #efeff4;
+  border-bottom: 1px solid #efeff4;
+}
+
+/* weui-cell */
+
+.weui-cell_active {
+  background-color: #d8d8d8;
+}
+
+.weui-cell__hd_large_icon {
+  width: 120rpx;
+  height: 120rpx;
+  margin: 20rpx 40rpx 20rpx 0;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.weui-cell__hd_icon {
+  width: 64rpx;
+  height: 64rpx;
+  margin-right: 20rpx;
+  vertical-align: middle;
+}
+
+.weui-cell__bd_desc {
+  color: #999;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+/* weui-loadmore */
+
+.weui-loadmore__tips_in-line {
+  background-color: #efeff4;
+}

@@ -1,0 +1,46 @@
+.service-plan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40rpx;
+  padding: 40rpx;
+  border: 1rpx solid #d9d9d9;
+  background-color: #fff;
+}
+
+.service-plan__hd {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  color: #999;
+}
+
+.vouchers-count {
+  margin-right: 16rpx;
+  color: #000;
+  font-size: 48rpx;
+  font-weight: 600;
+}
+
+.service-plan__bd {
+  flex: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f76260;
+}
+
+.price {
+  font-size: 48rpx;
+  font-weight: 600;
+}
+
+.service-plan__ft {
+  flex: 3;
+  display: flex;
+  align-items: center;
+}
+
+.buy-btn {
+  width: 100%;
+}

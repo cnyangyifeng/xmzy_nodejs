@@ -1,0 +1,17 @@
+{
+	"client": "./client",
+	"svr": "./server",
+	"miniprogramRoot": "./client",
+	"qcloudRoot": "./server",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"appid": "wxa01c657814b80e65",
+	"projectname": "xmzy_nodejs",
+	"libVersion": "1.9.1",
+	"condition": {}
+}

@@ -1,0 +1,11 @@
+{
+  "name": "xmzy",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Eric YANG",
+  "license": "MIT",
+  "dependencies": {
+    "wafer2-client-sdk": "^1.1.1"
+  },
+  "devDependencies": {}
+}

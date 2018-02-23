@@ -1,0 +1,15 @@
+<view class="page">
+  <view class="page__hd_inverse">
+    <text class="page__desc_inverse">甄选全国优秀教师\n中小学家庭作业同步辅导\n每晚 6:00 - 10:00\n不见不散</text>
+  </view>
+  <view class="page__bd">
+    <view class="weui-grids">
+      <block wx:for="{{disciplines}}" wx:key="id">
+        <view class="weui-grid" hover-class="weui-grid_active" data-discipline-id="{{item.id}}" bindtap="gridTap">
+          <image class="weui-grid__icon" src="../../assets/images/{{item.id}}.svg"></image>
+          <view class="weui-grid__label">{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,26 @@
+<view class="page">
+  <view class="page__hd_inverse">
+    <view class="page__desc_inverse">温故而知新 可以为师矣</view>
+  </view>
+  <view class="page__bd">
+    <block wx:for="{{notebook.notes}}" wx:key="id">
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__hd">{{item.date}}</view>
+        <view class="weui-panel__bd">
+          <block wx:for="{{item.records}}" wx:key="id">
+            <navigator url="/pages/activity/activity?id={{item.activityId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image class="weui-cell__hd_icon" src="/assets/images/{{item.discipline.id}}.svg"></image>
+              </view>
+              <view class="weui-cell__bd">{{item.discipline.name}}</view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+          </block>
+        </view>
+      </view>
+    </block>
+    <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line weui-loadmore__tips_in-dot"></view>
+    </view>
+  </view>
+</view>
