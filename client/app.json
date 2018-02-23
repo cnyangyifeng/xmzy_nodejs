@@ -31,7 +31,7 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "辅导",
+        "text": "作业",
         "iconPath": "assets/images/home.png",
         "selectedIconPath": "assets/images/home_fill.png"
       },

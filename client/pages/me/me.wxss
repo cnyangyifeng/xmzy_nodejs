@@ -13,6 +13,12 @@
   text-align: center;
 }
 
+.voucher {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+}
+
 .vouchers-count {
   margin: 0 10rpx;
   color: #e64340;

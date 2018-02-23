@@ -92,6 +92,8 @@ page {
 }
 
 .weui-cell__bd_desc {
+  display: flex;
+  align-items: center;
   color: #999;
   font-size: 14px;
   line-height: 28px;
