@@ -475,7 +475,7 @@ Page({
       fail: err => {
         // 隐藏 loading 提示框
         wx.hideLoading()
-        // 请求失败，则显示 “发送作业失败” 弹框
+        // 请求失败，则显示失败弹框
         wx.showToast({
           title: msgs.send_assignment_fail_title,
           image: '/assets/images/fail.png',
@@ -515,7 +515,7 @@ Page({
       fail: err => {
         // 隐藏 loading 提示框
         wx.hideLoading()
-        // 请求失败，则显示 “发送消息失败” 弹框
+        // 请求失败，则显示失败弹框
         wx.showToast({
           title: msgs.msgs.send_xmessage_fail_title,
           image: '/assets/images/fail.png',
