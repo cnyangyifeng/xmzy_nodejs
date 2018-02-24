@@ -23,7 +23,7 @@ const configs = {
   cos: {
     region: 'ap-guangzhou',
     fileBucket: 'xmzy',
-    uploadFolder: ''
+    uploadFolder: 'user_data'
   },
   // 微信登录态有效期
   wxLoginExpires: 7200,

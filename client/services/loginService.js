@@ -54,7 +54,7 @@ var ensureLoggedIn = function () {
                   showCancel: false
                 })
                 // 操作失败
-                reject()
+                // reject()
               }
             })
           }

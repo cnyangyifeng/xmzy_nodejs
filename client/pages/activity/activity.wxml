@@ -10,10 +10,10 @@
     </view>
     <view class="sidebar-heading">消息列表</view>
     <scroll-view scroll-y class="xmessage-list">
-      <block wx:for="{{xmessages}}" wx:key="xmessage_id">
+      <block wx:for="{{xmessages}}" wx:key="xmessageId">
         <view class="xmessage" bindtap="xmessageViewTap">
           <!--{{item.vid + 1}}-->
-          <image class="avatar-image" src="{{studentInfo.avatarUrl}}"></image>
+          <image class="avatar-image" src="{{item.senderInfo.avatarUrl}}"></image>
           <view class="audio-subfix">16"</view>
         </view>
       </block>

@@ -13,6 +13,7 @@ const msgs = {
   enter_classroom_processing_title: `准备教室`,
 
   loading_title: `正在加载`,
+  loading_activity_title: `准备教室`,
   loading_assignment_title: `加载作业`,
   loading_xmessages_title: `加载消息`,
 

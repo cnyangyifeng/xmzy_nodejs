@@ -1,4 +1,5 @@
 const configs = require('../../config')
+const disciplines = require('../../services/disciplines')
 const loginService = require('../../services/loginService')
 const msgs = require('../../msg')
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
@@ -11,35 +12,27 @@ Page({
    */
 
   data: {
-    disciplines: [{
-      id: 'chinese',
-      name: '语文'
-    }, {
-      id: 'maths',
-      name: '数学'
-    }, {
-      id: 'english',
-      name: '英语'
-    }, {
-      id: 'physics',
-      name: '物理'
-    }, {
-      id: 'chemistry',
-      name: '化学'
-    }, {
-      id: 'biology',
-      name: '生物'
-    }, {
-      id: 'politics',
-      name: '政治'
-    }, {
-      id: 'history',
-      name: '历史'
-    }, {
-      id: 'geography',
-      name: '地理'
-    }],
-    userInfo: null, // 用户信息
+
+    /* 学科列表 */
+
+    disciplines: [],
+
+    /* 用户信息 */
+
+    userInfo: null,
+
+  },
+
+  /* ================================================================================ */
+
+  /**
+   * 监听页面加载
+   */
+
+  onLoad: function (options) {
+    this.setData({
+      disciplines: disciplines
+    })
   },
 
   /**
@@ -55,6 +48,8 @@ Page({
     }
   },
 
+  /* ================================================================================ */
+
   /**
    * 绑定事件：点击 Grid
    */
@@ -63,7 +58,7 @@ Page({
     console.log(`grid cell tap`)
     const disciplineId = e.currentTarget.dataset.disciplineId
     loginService.ensureLoggedIn().then(
-      () => this.requestActivity(disciplineId)
+      () => this.getActivity(disciplineId)
     )
   },
 
@@ -76,11 +71,13 @@ Page({
     })
   },
 
+  /* ================================================================================ */
+
   /**
-   * 创建或更新一条 Activity 数据
+   * 获取一条 Activity 数据
    */
 
-  requestActivity: function (disciplineId) {
+  getActivity: function (disciplineId) {
     // 显示 loading 提示框
     wx.showLoading({
       title: msgs.enter_classroom_processing_title,

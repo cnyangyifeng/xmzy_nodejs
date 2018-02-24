@@ -11,8 +11,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-top: 1rpx solid #999;
-  border-right: 1rpx solid #999;
   border-left: 1rpx solid #d9d9d9;
 }
 
