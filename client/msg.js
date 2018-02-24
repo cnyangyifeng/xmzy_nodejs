@@ -14,8 +14,8 @@ const msgs = {
 
   loading_title: `正在加载`,
   loading_activity_title: `准备教室`,
-  loading_assignment_title: `加载作业`,
-  loading_xmessages_title: `加载消息`,
+  loading_assignment_title: `准备作业`,
+  loading_xmessages_title: `接收消息`,
 
   login_fail_title: `登录失败`,
   login_processing_title: `正在登录`,
@@ -28,8 +28,8 @@ const msgs = {
   send_xmessage_fail_title: `发送消息失败`,
   send_xmessage_processing_title: `发送消息`,
 
-  send_assignment_fail_title: `发送作业失败`,
-  send_assignment_processing_title: `发送作业`,
+  send_assignment_fail_title: `上传作业失败`,
+  send_assignment_processing_title: `上传作业`,
 
   // upload_fail_title: `上传失败`,
   // upload_processing_title: `正在上传`

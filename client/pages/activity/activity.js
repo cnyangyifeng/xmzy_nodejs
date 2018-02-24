@@ -73,10 +73,6 @@ Page({
     })
     // Moment 本地化
     moment.locale('zh-cn')
-    // 设置页面标题
-    wx.setNavigationBarTitle({
-      title: `12.31 语文作业`
-    })
   },
 
   /**
@@ -128,7 +124,7 @@ Page({
       const disciplineName = disciplines.find(e => {
         return e.id === this.data.activity.disciplineId
       }).name
-      title = `${studentNickName}的${createDate}${disciplineName}作业`
+      title = `${studentNickName} ${createDate} ${disciplineName}`
     } else {
       title = `熊猫作业`
     }
@@ -333,6 +329,15 @@ Page({
             studentInfo: JSON.parse(res.data.data.studentInfo),
             tutorInfo: JSON.parse(res.data.data.tutorInfo),
             assignment: JSON.parse(res.data.data.currentAssignment)
+          })
+          // 设置页面标题
+          const createDate = moment(this.data.activity.createTime).format('MMMDo')
+          const disciplineName = disciplines.find(e => {
+            return e.id === this.data.activity.disciplineId
+          }).name
+          const title = `${createDate} ${disciplineName}`
+          wx.setNavigationBarTitle({
+            title: title
           })
           // 绘制 Assignment
           if (this.data.assignment) {
