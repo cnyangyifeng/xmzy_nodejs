@@ -124,7 +124,7 @@ Page({
       const disciplineName = disciplines.find(e => {
         return e.id === this.data.activity.disciplineId
       }).name
-      title = `${studentNickName} ${createDate} ${disciplineName}`
+      title = `${createDate} ${studentNickName} ${disciplineName}作业`
     } else {
       title = `熊猫作业`
     }
