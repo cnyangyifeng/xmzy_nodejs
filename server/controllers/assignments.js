@@ -4,24 +4,14 @@ const moment = require('moment')
 const uuidGenerator = require('uuid/v4')
 
 async function getAssignmentsByActivityId(ctx, next) {
-  if (ctx.state.$wxInfo.loginState === 1) {
-    const activityId = ctx.params.activity_id
-    ctx.state.data = await coredb('assignment').select().where('activityId', activityId)
-  } else {
-    // 登录态已过期
-    ctx.state.code = -1
-  }
+  const activityId = ctx.params.activity_id
+  ctx.state.data = await coredb('assignment').select().where('activityId', activityId)
 }
 
 async function getAssignmentByActivityIdAndAssignmentId(ctx, next) {
-  if (ctx.state.$wxInfo.loginState === 1) {
-    const activityId = ctx.params.activity_id
-    const assignmentId = ctx.params.assignment_id
-    ctx.state.data = await coredb('assignment').first().where({ 'activityId': activityId, 'assignmentId': assignmentId })
-  } else {
-    // 登录态已过期
-    ctx.state.code = -1
-  }
+  const activityId = ctx.params.activity_id
+  const assignmentId = ctx.params.assignment_id
+  ctx.state.data = await coredb('assignment').first().where({ 'activityId': activityId, 'assignmentId': assignmentId })
 }
 
 /**

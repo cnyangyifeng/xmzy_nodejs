@@ -3,7 +3,9 @@ const coredb = require('../services/coredb')
 const moment = require('moment')
 const uuidGenerator = require('uuid/v4')
 
-async function getActivities(ctx, next) {
+/* ================================================================================ */
+
+async function getMyActivities(ctx, next) {
   if (ctx.state.$wxInfo.loginState === 1) {
     const studentId = ctx.state.$wxInfo.userinfo.openId
     const pageNo = Number.parseInt(ctx.request.query['page_no'])
@@ -42,18 +44,19 @@ async function getActivities(ctx, next) {
  */
 
 async function getActivityByActivityId(ctx, next) {
-  if (ctx.state.$wxInfo.loginState === 1) {
-    const activityId = ctx.params.activity_id
-    const activity = await coredb('activity').first().where('activityId', activityId)
+  const activityId = ctx.params.activity_id
+  const activity = await coredb('activity').first().where('activityId', activityId)
+  if (activity.currentAssignmentId) {
     const assignment = await coredb('assignment').first().where('assignmentId', activity.currentAssignmentId)
-    assignment != undefined
-      ? activity['currentAssignment'] = JSON.stringify(assignment)
-      : activity['currentAssignment'] = null
-    ctx.state.data = activity
+    if (assignment != undefined) {
+      activity['currentAssignment'] = JSON.stringify(assignment)
+    } else {
+      activity['currentAssignment'] = await initDefaultAssignment(activity)
+    }
   } else {
-    // 登录态已过期
-    ctx.state.code = -1
+    activity['currentAssignment'] = await initDefaultAssignment(activity)
   }
+  ctx.state.data = activity
 }
 
 async function postActivity(ctx, next) {
@@ -73,8 +76,26 @@ async function postActivity(ctx, next) {
   }
 }
 
+/* ================================================================================ */
+
+async function initDefaultAssignment(activity) {
+  // 创建一条默认的 Assignment 数据
+  const assignmentId = uuidGenerator()
+  const activityId = activity.activityId
+  const senderId = JSON.parse(activity.studentInfo).openId
+  const senderInfo = activity.studentInfo
+  const defaultImageData = '{\"imgUrl\":\"http://xmzy-1252644202.cosgz.myqcloud.com/system_data/1519492572474-H1VJ0fyOf.jpg\",\"size\":99819,\"mimeType\":\"image/jpeg\",\"name\":\"1519492572474-H1VJ0fyOf.jpg\",\"fileBucket\":\"xmzy\",\"qcloudAppId\":\"1252644202\",\"region\":\"ap-guangzhou\",\"uploadFolder\":\"system_data/\",\"imgKey\":\"1519492572474-H1VJ0fyOf.jpg\"}'
+  const createTime = activity.createTime
+  const lastVisitTime = activity.lastVisitTime
+  await coredb('assignment').insert({ assignmentId: assignmentId, activityId: activityId, senderId: senderId, senderInfo: senderInfo, imageData: defaultImageData, createTime: createTime, lastVisitTime: lastVisitTime })
+  await coredb('activity').update('currentAssignmentId', assignmentId).where('activityId', activityId)
+  return await coredb('assignment').first().where(assignmentId, assignmentId)
+}
+
+/* ================================================================================ */
+
 module.exports = {
-  getActivities,
+  getMyActivities,
   getActivityByActivityId,
   postActivity
 }

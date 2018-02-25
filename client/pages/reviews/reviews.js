@@ -40,7 +40,7 @@ Page({
 
   onShow: function () {
     loginService.ensureLoggedIn().then(
-      this.getActivities
+      this.getMyActivities
     )
   },
 
@@ -66,12 +66,7 @@ Page({
    * 获取当前用户相关的 Activities
    */
 
-  getActivities: function () {
-    // 显示 loading 提示框
-    wx.showLoading({
-      title: msgs.loading_title,
-      mask: true
-    })
+  getMyActivities: function () {
     // 获取 Activities
     qcloud.request({
       url: `${configs.weapp}/activities?page_no=${this.data.pageNo}`,
@@ -114,12 +109,9 @@ Page({
             pageNo: pageNo
           })
         }
-        // 隐藏 loading 提示框
-        wx.hideLoading()
       },
       fail: err => {
-        // 隐藏 loading 提示框
-        wx.hideLoading()
+        console.log(err)
       }
     })
   }

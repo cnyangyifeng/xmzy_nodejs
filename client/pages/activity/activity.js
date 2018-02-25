@@ -5,8 +5,8 @@ const moment = require('../../utils/moment-with-locales.min.js')
 const msgs = require('../../msg')
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 
-const canvasContext = wx.createCanvasContext('imageCanvas')
-const innerAudioContext = wx.createInnerAudioContext()
+const backdropContext = wx.createCanvasContext('backdrop')
+const audioContext = wx.createInnerAudioContext()
 const recorderManager = wx.getRecorderManager()
 
 Page({
@@ -18,7 +18,8 @@ Page({
   data: {
 
     /*
-     * Activity
+     *
+     * activity
      *  - activityId
      *  - disciplineId
      *  - studentId
@@ -38,15 +39,16 @@ Page({
      *    - lastVisitTime
      *  - createTime
      *  - lastVisitTime
+     * 
      */
 
-    activity: null, // 当前 Activity
-    activityId: '', // 当前 Activity 的 Id
-    studentInfo: null, // 当前 StudentInfo
-    tutorInfo: null, // 当前 TutorInfo
-    assignment: null, // 当前 Assignment
+    activity: null, // 当前 activity
+    activityId: '', // 当前 activity 的 id
+    studentInfo: null, // 当前 studentInfo
+    tutorInfo: null, // 当前 tutorInfo
+    assignment: null, // 当前 assignment
 
-    /* 当前 Activity - Assignment 相关的 Xmessages */
+    /* 当前 activity, assignment 相关的 xmessages */
 
     xmessages: [],
 
@@ -54,8 +56,8 @@ Page({
 
     /* Page UI 数据 */
 
-    imageCanvasWidth: 0, // Image Canvas 的宽度
-    imageCanvasHeight: 0, // Image Canvas 的高度
+    backdropWidth: 0, // backdrop 的宽度
+    backdropHeight: 0, // backdrop 的高度
     speakButtonText: '按住 说话', // 说话按钮的文本
 
   },
@@ -71,7 +73,7 @@ Page({
     this.setData({
       activityId: options.activity_id
     })
-    // Moment 本地化
+    // moment 本地化
     moment.locale('zh-cn')
   },
 
@@ -80,16 +82,16 @@ Page({
    */
 
   onReady: function () {
-    // 设置 Image Canvas 的尺寸
-    wx.createSelectorQuery().select('#image-canvas').boundingClientRect(rect => {
+    // 设置 backdrop 的尺寸
+    wx.createSelectorQuery().select('#backdrop').boundingClientRect(rect => {
       this.setData({
-        imageCanvasWidth: rect.width,
-        imageCanvasHeight: rect.height
+        backdropWidth: rect.width,
+        backdropHeight: rect.height
       })
     }).exec()
-    // 获取当前 Activity - Assignment
+    // 获取当前 activity, assignment
     this.getActivityByActivityId()
-      // 显示当前 Activity - Assignment 相关的全部 Xmessages
+      // 显示当前 activity, assignment 相关的全部 xmessages
       .then(this.getXmessagesByActivityIdAndAssignmentId)
       // 获取微信授权: scope.record
       .then(this.authRecordScope)
@@ -119,12 +121,11 @@ Page({
     // 设置转发信息的标题
     let title;
     if (this.data.activity) {
-      const studentNickName = this.data.studentInfo.nickName
       const createDate = moment(this.data.activity.createTime).format('MMMDo dddd')
       const disciplineName = disciplines.find(e => {
         return e.id === this.data.activity.disciplineId
       }).name
-      title = `${createDate} ${studentNickName} ${disciplineName}作业`
+      title = `${createDate} ${disciplineName}作业`
     } else {
       title = `熊猫作业`
     }
@@ -133,10 +134,10 @@ Page({
       title: title,
       path: `pages/activity/activity?activity_id=${this.data.activityId}`,
       success: res => {
-        console.log(`on share app message success`)
+        console.log(`转发成功`)
       },
       fail: err => {
-        console.log(`on share app message cancel`)
+        console.log(`取消转发`)
       }
     }
   },
@@ -144,34 +145,34 @@ Page({
   /* ================================================================================ */
 
   /**
-   * 绑定事件：点击 xmessageView
+   * 绑定事件：点击 xmessage
    */
 
-  xmessageViewTap: function (e) {
+  xmessageTap: function (e) {
+    console.log(`点击 xmessage`)
     const vid = e.currentTarget.dataset.vid
-    console.log(`message view tap: ${this.data.xmessages[vid].filePath}`)
-    innerAudioContext.src = this.data.xmessages[vid].filePath
-    innerAudioContext.onPlay(() => {
-      console.log('开始播放语音')
+    audioContext.src = this.data.xmessages[vid].filePath
+    audioContext.onPlay(() => {
+      console.log(`开始播放 xmessage`)
     })
-    innerAudioContext.onError((res) => {
-      console.log('播放语音异常')
-      console.log('errMsg: ' + res.errMsg)
-      console.log('errCode: ' + res.errCode)
+    audioContext.onError((res) => {
+      console.log(`播放 xmessage 出现错误`)
+      console.log(` - errMsg: ` + res.errMsg)
+      console.log(` - errCode: ` + res.errCode)
     })
-    innerAudioContext.play()
+    audioContext.play()
   },
 
-  imageCanvasTouchStart: function () {
-    console.log(`image canvas touch start`)
+  backdropTouchStart: function () {
+    console.log(`开始触摸 backdrop`)
   },
 
-  imageCanvasTouchMove: function () {
-    console.log(`image canvas touch move`)
+  backdropTouchMove: function () {
+    console.log(`移动触摸 backdrop`)
   },
 
-  imageCanvasTouchEnd: function () {
-    console.log(`image canvas touch end`)
+  backdropTouchEnd: function () {
+    console.log(`结束触摸 backdrop`)
   },
 
   /**
@@ -179,7 +180,7 @@ Page({
    */
 
   settingButtonTap: function () {
-    console.log(`setting button tap`)
+    console.log(`点击 settingButton`)
     wx.openSetting()
   },
 
@@ -188,17 +189,19 @@ Page({
    */
 
   closeButtonTap: function () {
+    console.log(`点击 closeButton`)
     wx.showModal({
       title: msgs.confirm_exit_classroom_title,
       content: msgs.confirm_exit_classroom_content,
       success: res => {
         if (res.confirm) {
-          // 重新启动至 Home 页面
+          console.log(`离开教室，重新启动至 home 页面`)
+          // 重新启动至 home 页面
           wx.reLaunch({
             url: `../home/home`
           })
         } else if (res.cancel) {
-          console.log('cancel exiting classroom')
+          console.log(`取消离开教室`)
         }
       }
     })
@@ -227,7 +230,7 @@ Page({
    */
 
   galleryButtonTap: function () {
-    console.log('gallery button tap')
+    console.log(`点击 galleryButton`)
     wx.previewImage({
       current: 'https://xmzy-1252644202.cos.ap-guangzhou.myqcloud.com/weapp/bg.jpg',
       urls: ['https://xmzy-1252644202.cos.ap-guangzhou.myqcloud.com/weapp/bg.jpg', 'https://xmzy-1252644202.cos.ap-guangzhou.myqcloud.com/weapp/bg.jpg']
@@ -244,7 +247,7 @@ Page({
       recorderStartTime: Date.now()
     })
     recorderManager.onStart(() => {
-      console.log('recorder manager on start')
+      console.log('启动 recorderManager')
     })
     const options = {
       duration: 600000, // 10min
@@ -266,9 +269,9 @@ Page({
       speakButtonText: '按住 说话'
     })
     recorderManager.onStop(res => {
-      console.log(`recorder manager on stop`)
+      console.log(`终止 recorderManager`)
       const stopTime = Date.now()
-      console.log(`recording duration: ${stopTime - this.data.recorderStartTime}`)
+      console.log(`录音时长: ${stopTime - this.data.recorderStartTime}`)
       if (stopTime - this.data.recorderStartTime > 500) {
         // 提交 Xmessage
         loginService.ensureLoggedIn().then(
@@ -281,25 +284,6 @@ Page({
           showCancel: false
         })
       }
-      // wx.saveFile({
-      //   tempFilePath: tempFilePath,
-      //   success: res => {
-      //     console.log('saved file path: ' + res.savedFilePath)
-      //   }
-      // })
-      // wx.getSavedFileList({
-      //   success: res => {
-      //     let xmessages = []
-      //     for (let i = 0; i < res.fileList.length; i++) {
-      //       const createTime = new Date(res.fileList[i].createTime)
-      //       const voice = { vid: i, filePath: res.fileList[i].filePath, createTime: createTime }
-      //       xmessages = xmessages.concat(voice)
-      //     }
-      //     this.setData({
-      //       xmessages: xmessages
-      //     })
-      //   }
-      // })
     })
     recorderManager.stop()
   },
@@ -307,11 +291,11 @@ Page({
   /* ================================================================================ */
 
   /**
-   * 获取当前 Activity - Assignment
+   * 获取当前 activity, assignment
    */
 
   getActivityByActivityId: function () {
-    console.log(`get activity by activity id`)
+    console.log(`获取当前 activity, assignment`)
     return new Promise((resolve, reject) => {
       // 显示 loading 提示框
       wx.showLoading({
@@ -320,7 +304,6 @@ Page({
       })
       qcloud.request({
         url: `${configs.weapp}/activities/${this.data.activityId}`,
-        /* login: true, */
         // 请求成功
         success: res => {
           // 更新页面数据 activity, studentInfo, tutorInfo
@@ -335,20 +318,20 @@ Page({
           const disciplineName = disciplines.find(e => {
             return e.id === this.data.activity.disciplineId
           }).name
-          const title = `${createDate} ${disciplineName}`
+          const title = `${createDate} ${disciplineName}作业`
           wx.setNavigationBarTitle({
             title: title
           })
-          // 绘制 Assignment
+          // 绘制 assignment
           if (this.data.assignment) {
             const imageData = JSON.parse(this.data.assignment.imageData)
             wx.getImageInfo({
               src: imageData.imgUrl,
               success: res => {
-                const imageScaleWidth = this.data.imageCanvasHeight * res.width / res.height
-                const x = (this.data.imageCanvasWidth - imageScaleWidth) / 2
-                canvasContext.drawImage(res.path, x, 0, imageScaleWidth, this.data.imageCanvasHeight)
-                canvasContext.draw()
+                const imageScaleWidth = this.data.backdropHeight * res.width / res.height
+                const x = (this.data.backdropWidth - imageScaleWidth) / 2
+                backdropContext.drawImage(res.path, x, 0, imageScaleWidth, this.data.backdropHeight)
+                backdropContext.draw()
               }
             })
           }
@@ -359,7 +342,7 @@ Page({
         },
         // 请求失败
         fail: err => {
-          console.log(`get activity fail: ${JSON.stringify(err)}`)
+          console.log(err)
           // 隐藏 loading 提示框
           wx.hideLoading()
           // 操作失败
@@ -370,13 +353,13 @@ Page({
   },
 
   /**
-   * 显示当前 Activity - Assignment 相关的全部 Xmessages
+   * 获取当前 activity, assignment 相关的全部 xmessages
    */
 
   getXmessagesByActivityIdAndAssignmentId: function () {
     return new Promise((resolve, reject) => {
-      console.log(`get xmessages by activity id and assignment id`)
-      // 如果未指定当前 Assignment，则直接返回 
+      console.log(`获取当前 activity, assignment 相关的全部 xmessages`)
+      // 如果未指定当前 assignment，则直接返回 
       if (!this.data.assignment) {
         return
       }
@@ -385,13 +368,11 @@ Page({
         title: msgs.loading_xmessages_title,
         mask: true
       })
-      // 获取 Xmessages
+      // 获取 xmessages
       qcloud.request({
         url: `${configs.weapp}/activities/${this.data.activity.activityId}/assignments/${this.data.assignment.assignmentId}/xmessages`,
-        /* login: true, */
         // 请求成功
         success: res => {
-          console.log(JSON.stringify(res.data.data))
           // 更新页面数据 xmessages
           res.data.data.forEach(item => {
             item.senderInfo = JSON.parse(item.senderInfo)
@@ -399,7 +380,6 @@ Page({
           this.setData({
             xmessages: res.data.data
           })
-          console.log(this.data.xmessages)
           // 隐藏 loading 提示框
           wx.hideLoading()
           // 操作成功
@@ -407,7 +387,7 @@ Page({
         },
         // 请求失败
         fail: err => {
-          console.log(`获取 Xmessages 失败: ${JSON.stringify(err)}`)
+          console.log(err)
           // 隐藏 loading 提示框
           wx.hideLoading()
           // 操作失败
@@ -449,11 +429,11 @@ Page({
   },
 
   /**
-   * 提交 Assignment
+   * 提交 assignment
    */
 
   postAssignment: function (filePath) {
-    console.log(`post assignment`)
+    console.log(`提交 assignment`)
     // 显示 loading 提示框
     wx.showLoading({
       title: msgs.send_assignment_processing_title,
@@ -467,7 +447,7 @@ Page({
       success: res => {
         // 隐藏 loading 提示框
         wx.hideLoading()
-        // 重新启动至 Activity 页面
+        // 重新启动至 activity 页面
         wx.reLaunch({
           url: `../activity/activity?activity_id=${this.data.activity.activityId}`
         })
@@ -486,12 +466,12 @@ Page({
   },
 
   /**
-   * 提交 Xmessage
+   * 提交 xmessage
    */
 
   postXmessage: function (filePath) {
-    console.log(`post xmessage`)
-    // 如果未指定当前 Assignment，则直接返回 
+    console.log(`提交 xmessage`)
+    // 如果未指定当前 assignment，则直接返回 
     if (!this.data.assignment) {
       return
     }
@@ -500,7 +480,7 @@ Page({
       title: msgs.send_xmessage_processing_title,
       mask: true
     })
-    // 上传文件至 COS 并创建一条 Xmessage 数据
+    // 上传文件至 cos 并创建一条 xmessage 数据
     wx.uploadFile({
       url: `${configs.weapp}/activities/${this.data.activity.activityId}/assignments/${this.data.assignment.assignmentId}/xmessages`,
       filePath: filePath,
@@ -509,7 +489,7 @@ Page({
       success: res => {
         // 隐藏 loading 提示框
         wx.hideLoading()
-        // 显示当前 Activity 相关的全部 Xmessages
+        // 显示当前 activity 相关的全部 xmessages
         this.getXmessagesByActivityIdAndAssignmentId()
       },
       fail: err => {

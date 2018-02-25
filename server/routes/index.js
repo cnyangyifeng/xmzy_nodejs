@@ -38,19 +38,19 @@ router.post('/message', controllers.message.post)
 
 // --- Activities --- //
 
-router.get('/activities', validationMiddleware, controllers.activities.getActivities)
-router.get('/activities/:activity_id', validationMiddleware, controllers.activities.getActivityByActivityId)
+router.get('/activities', validationMiddleware, controllers.activities.getMyActivities)
+router.get('/activities/:activity_id', controllers.activities.getActivityByActivityId)
 router.post('/activities', validationMiddleware, controllers.activities.postActivity)
 
 // --- Assignments --- //
 
-router.get('/activities/:activity_id/assignments', validationMiddleware, controllers.assignments.getAssignmentsByActivityId)
-router.get('/activities/:activity_id/assignments/:assignment_id', validationMiddleware, controllers.assignments.getAssignmentByActivityIdAndAssignmentId)
+router.get('/activities/:activity_id/assignments', controllers.assignments.getAssignmentsByActivityId)
+router.get('/activities/:activity_id/assignments/:assignment_id', controllers.assignments.getAssignmentByActivityIdAndAssignmentId)
 router.post('/activities/:activity_id/assignments', validationMiddleware, controllers.assignments.postAssignmentWithActivityId)
 
 // --- Xmessages --- //
 
-router.get('/activities/:activity_id/assignments/:assignment_id/xmessages', validationMiddleware, controllers.xmessages.getXmessagesByActivityIdAndAssignmentId)
+router.get('/activities/:activity_id/assignments/:assignment_id/xmessages', controllers.xmessages.getXmessagesByActivityIdAndAssignmentId)
 router.post('/activities/:activity_id/assignments/:assignment_id/xmessages', validationMiddleware, controllers.xmessages.postXmessageWithActivityIdAndAssignmentId)
 
 module.exports = router
