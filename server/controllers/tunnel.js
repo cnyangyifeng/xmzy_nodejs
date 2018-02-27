@@ -8,7 +8,9 @@ const debug = require('debug')('xmzy')
  */
 const userMap = {}
 
-// 保存 当前已连接的 WebSocket 信道ID列表
+/**
+ * 保存 当前已连接的 WebSocket 信道ID列表
+ */
 const connectedTunnelIds = []
 
 /**
@@ -117,9 +119,7 @@ module.exports = {
   get: async ctx => {
     const data = await tunnel.getTunnelUrl(ctx.req)
     const tunnelInfo = data.tunnel
-
     userMap[tunnelInfo.tunnelId] = data.userinfo
-
     ctx.state.data = tunnelInfo
   },
   // 信道将信息传输过来的时候

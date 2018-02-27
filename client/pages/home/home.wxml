@@ -7,7 +7,7 @@
     <block wx:else>
       <image class="logo" src="../../assets/images/logo.jpg"></image>
     </block>
-    <text class="page__desc_inverse">中小学家庭作业同步辅导</text>
+    <text class="page__desc_inverse">中小学课后作业在线辅导</text>
   </view>
   <view class="page__bd">
     <view class="weui-grids">

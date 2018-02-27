@@ -50,7 +50,7 @@ var ensureLoggedIn = function () {
                 // 显示 “登录失败” 弹窗
                 wx.showModal({
                   title: msgs.login_fail_title,
-                  content: error.message,
+                  content: err.message,
                   showCancel: false
                 })
                 // 操作失败
@@ -83,7 +83,7 @@ var ensureLoggedIn = function () {
             default:
               wx.showModal({
                 title: msgs.login_fail_title,
-                content: error.message,
+                content: err.message,
                 showCancel: false
               })
           }

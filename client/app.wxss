@@ -96,7 +96,7 @@ page {
   align-items: center;
   color: #666;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 28px;
 }
 

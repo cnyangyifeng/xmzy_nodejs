@@ -1,4 +1,5 @@
 Page({
+
   data: {
     servicePlans: [{
       spid: 1,
@@ -8,12 +9,9 @@ Page({
       spid: 2,
       vouchersCount: 10,
       price: 199
-    }, {
-      spid: 3,
-      vouchersCount: 100,
-      price: 1999
     }]
   },
+
   buyButtonTap: function () {
     console.log('buy button tap')
     wx.requestPayment({
@@ -30,4 +28,5 @@ Page({
       }
     })
   }
+
 })

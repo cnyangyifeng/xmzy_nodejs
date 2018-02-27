@@ -3,10 +3,18 @@ const coredb = require('../services/coredb')
 const moment = require('moment')
 const uuidGenerator = require('uuid/v4')
 
+/* ================================================================================ */
+
 async function getXmessagesByActivityIdAndAssignmentId(ctx, next) {
   const activityId = ctx.params.activity_id
   const assignmentId = ctx.params.assignment_id
-  ctx.state.data = await coredb('xmessage').select().where({ 'activityId': activityId, 'assignmentId': assignmentId })
+  ctx.state.data =
+    await coredb('xmessage')
+      .select()
+      .where({
+        'activityId': activityId,
+        'assignmentId': assignmentId
+      })
 }
 
 async function postXmessageWithActivityIdAndAssignmentId(ctx, next) {
@@ -22,14 +30,25 @@ async function postXmessageWithActivityIdAndAssignmentId(ctx, next) {
     const audioData = JSON.stringify(result)
     const createTime = moment().format('YYYY-MM-DD HH:mm:ss')
     const lastVisitTime = createTime
-    await coredb('xmessage').insert({ xmessageId: xmessageId, activityId: activityId, assignmentId: assignmentId, senderId: senderId, senderInfo: senderInfo, audioData: audioData, createTime: createTime, lastVisitTime: lastVisitTime })
-    // 返回 Xmessage Id
+    await coredb('xmessage')
+      .insert({
+        xmessageId: xmessageId,
+        activityId: activityId,
+        assignmentId: assignmentId,
+        senderId: senderId,
+        senderInfo: senderInfo,
+        audioData: audioData,
+        createTime: createTime,
+        lastVisitTime: lastVisitTime
+      })
     ctx.state.data = xmessageId
   } else {
     // 登录态已过期
     ctx.state.code = -1
   }
 }
+
+/* ================================================================================ */
 
 module.exports = {
   getXmessagesByActivityIdAndAssignmentId,

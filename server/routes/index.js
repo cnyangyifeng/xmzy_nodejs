@@ -36,19 +36,24 @@ router.get('/message', controllers.message.get)
 // POST 用来处理微信转发过来的客服消息
 router.post('/message', controllers.message.post)
 
-// --- Activities --- //
+// --- students --- //
+
+router.get('/students/:student_id', controllers.students.getStudentByStudentId)
+router.post('/students', validationMiddleware, controllers.students.postStudent)
+
+// --- activities --- //
 
 router.get('/activities', validationMiddleware, controllers.activities.getMyActivities)
 router.get('/activities/:activity_id', controllers.activities.getActivityByActivityId)
 router.post('/activities', validationMiddleware, controllers.activities.postActivity)
 
-// --- Assignments --- //
+// --- assignments --- //
 
 router.get('/activities/:activity_id/assignments', controllers.assignments.getAssignmentsByActivityId)
 router.get('/activities/:activity_id/assignments/:assignment_id', controllers.assignments.getAssignmentByActivityIdAndAssignmentId)
 router.post('/activities/:activity_id/assignments', validationMiddleware, controllers.assignments.postAssignmentWithActivityId)
 
-// --- Xmessages --- //
+// --- xmessages --- //
 
 router.get('/activities/:activity_id/assignments/:assignment_id/xmessages', controllers.xmessages.getXmessagesByActivityIdAndAssignmentId)
 router.post('/activities/:activity_id/assignments/:assignment_id/xmessages', validationMiddleware, controllers.xmessages.postXmessageWithActivityIdAndAssignmentId)

@@ -3,6 +3,10 @@
     <view class="page__desc_inverse">温故而知新 可以为师矣</view>
   </view>
   <view class="page__bd">
+    <view hidden="{{!loading}}" class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">加载中</view>
+    </view>
     <block wx:for="{{activities}}" wx:key="createDate">
       <view class="weui-panel weui-panel_access">
         <view class="weui-panel__hd">{{item.createDate}}</view>

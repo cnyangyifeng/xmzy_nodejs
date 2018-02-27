@@ -11,7 +11,8 @@ Page({
 
   data: {
     userInfo: null, // 用户信息
-    vouchersCount: 49 // 熊猫券的数量
+    hearts: 64,
+    diamonds: 2048
   },
 
   /* ================================================================================ */
@@ -32,10 +33,11 @@ Page({
   /* ================================================================================ */
 
   /**
-   * 绑定事件：点击 Unlogged Cell
+   * 绑定事件：点击 unloggedCell
    */
 
   unloggedCellTap: function () {
+    console.log(`点击 unloggedCell`)
     loginService.ensureLoggedIn().then(
       // 从本地缓存中读取 userInfo，更新页面数据 userInfo
       () => this.setData({
@@ -45,19 +47,19 @@ Page({
   },
 
   /**
-   * 绑定事件：点击 UserInfo Cell
+   * 绑定事件：点击 userInfoCell
    */
 
   userInfoCellTap: function () {
-    console.log(`userInfo cell tap`)
+    console.log(`点击 userInfoCell`)
   },
 
   /**
-   * 绑定事件：点击 Reviews Cell
+   * 绑定事件：点击 reviewsCell
    */
 
   reviewsCellTap: function () {
-    console.log(`reviews cell tap`)
+    console.log(`点击 reviewsCell`)
     loginService.ensureLoggedIn().then(
       () => wx.navigateTo({
         url: `../../pages/reviews/reviews`
@@ -66,24 +68,24 @@ Page({
   },
 
   /**
-   * 绑定事件：点击 ServicePlans Cell
+   * 绑定事件：点击 purchaseCellCell
    */
 
-  servicePlansCellTap: function () {
-    console.log(`servicePlans cell tap`)
+  purchaseCellTap: function () {
+    console.log(`点击 purchaseCellTapCell`)
     loginService.ensureLoggedIn().then(
       () => wx.navigateTo({
-        url: `../../packages/my/pages/servicePlans/servicePlans`
+        url: `../../packages/my/pages/purchase/purchase`
       })
     )
   },
 
   /**
-   * 绑定事件：点击 CC Cell
+   * 绑定事件：点击 ccCell
    */
 
   ccCellTap: function () {
-    console.log(`cc cell tap`)
+    console.log(`点击 ccCell`)
     wx.clearStorageSync()
     wx.showToast({
       title: 'Clear Storage',
@@ -93,11 +95,11 @@ Page({
   },
 
   /**
-   * 绑定事件：点击 Setup Cell
+   * 绑定事件：点击 setupCell
    */
 
   setupCellTap: function () {
-    console.log(`setup cell tap`)
+    console.log(`点击 setupCell`)
     wx.openSetting()
   }
 

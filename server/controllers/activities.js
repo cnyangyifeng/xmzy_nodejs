@@ -9,9 +9,16 @@ async function getMyActivities(ctx, next) {
   if (ctx.state.$wxInfo.loginState === 1) {
     const studentId = ctx.state.$wxInfo.userinfo.openId
     const pageNo = Number.parseInt(ctx.request.query['page_no'])
-    const limit = 10
+    const limit = 1
     const offset = pageNo * limit
-    ctx.state.data = await coredb('activity').select().where('studentId', studentId).orderBy('createTime', 'desc').limit(limit).offset(offset)
+    const endTime = moment().subtract(offset, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss')
+    const startTime = moment().subtract(offset + limit, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss')
+    console.log(`===========> ${startTime} ${endTime}`)
+    ctx.state.data =
+      await coredb('activity')
+        .select()
+        .whereRaw('studentId = ? and createTime between ? and ?', [studentId, startTime, endTime])
+        .orderBy('createTime', 'desc')
   } else {
     // 登录态已过期
     ctx.state.code = -1
@@ -19,7 +26,6 @@ async function getMyActivities(ctx, next) {
 }
 
 /**
- * 
  * Activity
  *  - activityId
  *  - disciplineId
@@ -40,22 +46,27 @@ async function getMyActivities(ctx, next) {
  *    - lastVisitTime
  *  - createTime
  *  - lastVisitTime
- * 
  */
 
 async function getActivityByActivityId(ctx, next) {
   const activityId = ctx.params.activity_id
-  const activity = await coredb('activity').first().where('activityId', activityId)
+  const activity =
+    await coredb('activity')
+      .first()
+      .where('activityId', activityId)
+  let assignment
   if (activity.currentAssignmentId) {
-    const assignment = await coredb('assignment').first().where('assignmentId', activity.currentAssignmentId)
-    if (assignment != undefined) {
-      activity['currentAssignment'] = JSON.stringify(assignment)
-    } else {
-      activity['currentAssignment'] = await initDefaultAssignment(activity)
+    assignment =
+      await coredb('assignment')
+        .first()
+        .where('assignmentId', activity.currentAssignmentId)
+    if (assignment == undefined) {
+      assignment = await initDefaultAssignment(activity)
     }
   } else {
-    activity['currentAssignment'] = await initDefaultAssignment(activity)
+    assignment = await initDefaultAssignment(activity)
   }
+  activity['currentAssignment'] = JSON.stringify(assignment)
   ctx.state.data = activity
 }
 
@@ -67,8 +78,15 @@ async function postActivity(ctx, next) {
     const studentInfo = JSON.stringify(ctx.state.$wxInfo.userinfo)
     const createTime = moment().format('YYYY-MM-DD HH:mm:ss')
     const lastVisitTime = createTime
-    await coredb('activity').insert({ activityId: activityId, disciplineId: disciplineId, studentId: studentId, studentInfo: studentInfo, createTime: createTime, lastVisitTime: lastVisitTime })
-    // 返回 Activity Id
+    await coredb('activity')
+      .insert({
+        activityId: activityId,
+        disciplineId: disciplineId,
+        studentId: studentId,
+        studentInfo: studentInfo,
+        createTime: createTime,
+        lastVisitTime: lastVisitTime
+      })
     ctx.state.data = activityId
   } else {
     // 登录态已过期
@@ -83,13 +101,26 @@ async function initDefaultAssignment(activity) {
   const assignmentId = uuidGenerator()
   const activityId = activity.activityId
   const senderId = JSON.parse(activity.studentInfo).openId
-  const senderInfo = activity.studentInfo
+  const senderInfo = JSON.stringify(activity.studentInfo)
   const defaultImageData = '{\"imgUrl\":\"http://xmzy-1252644202.cosgz.myqcloud.com/system_data/1519492572474-H1VJ0fyOf.jpg\",\"size\":99819,\"mimeType\":\"image/jpeg\",\"name\":\"1519492572474-H1VJ0fyOf.jpg\",\"fileBucket\":\"xmzy\",\"qcloudAppId\":\"1252644202\",\"region\":\"ap-guangzhou\",\"uploadFolder\":\"system_data/\",\"imgKey\":\"1519492572474-H1VJ0fyOf.jpg\"}'
   const createTime = activity.createTime
   const lastVisitTime = activity.lastVisitTime
-  await coredb('assignment').insert({ assignmentId: assignmentId, activityId: activityId, senderId: senderId, senderInfo: senderInfo, imageData: defaultImageData, createTime: createTime, lastVisitTime: lastVisitTime })
-  await coredb('activity').update('currentAssignmentId', assignmentId).where('activityId', activityId)
-  return await coredb('assignment').first().where(assignmentId, assignmentId)
+  await coredb('assignment')
+    .insert({
+      assignmentId: assignmentId,
+      activityId: activityId,
+      senderId: senderId,
+      senderInfo: senderInfo,
+      imageData: defaultImageData,
+      createTime: createTime,
+      lastVisitTime: lastVisitTime
+    })
+  await coredb('activity')
+    .update('currentAssignmentId', assignmentId)
+    .where('activityId', activityId)
+  return await coredb('assignment')
+    .first()
+    .where('assignmentId', assignmentId)
 }
 
 /* ================================================================================ */

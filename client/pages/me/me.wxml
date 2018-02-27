@@ -10,10 +10,14 @@
           <view class="weui-cell__bd">
             <view>{{userInfo.nickName}}</view>
             <view class="weui-cell__bd_desc">
-              <image class="voucher" src="/assets/images/voucher.svg"></image>
-              <text>剩余</text>
-              <text class="vouchers-count">{{vouchersCount}}</text>
-              <text>颗竹笋</text>
+              <view class="fortune">
+                <image class="fortune-icon" src="/assets/images/heart_fill.svg"></image>
+                <text>{{hearts}}</text>
+              </view>
+              <view class="fortune">
+                <image class="fortune-icon" src="/assets/images/praise_fill.svg"></image>
+                <text>{{diamonds}}</text>
+              </view>
             </view>
           </view>
         </view>
@@ -39,18 +43,16 @@
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>
     </view>
-    <!--
     <view class="weui-cells__title"></view>
     <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="servicePlansCellTap">
+      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="purchaseCellTap">
         <view class="weui-cell__hd">
-          <image class="weui-cell__hd_icon" src="../../assets/images/vouchers_fill.svg"></image>
+          <image class="weui-cell__hd_icon" src="../../assets/images/purchase_fill.svg"></image>
         </view>
-        <view class="weui-cell__bd">买券</view>
+        <view class="weui-cell__bd">充值</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>
     </view>
-    -->
     <view class="weui-cells__title"></view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="ccCellTap">

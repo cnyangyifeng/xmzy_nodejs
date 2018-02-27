@@ -3,19 +3,29 @@ const coredb = require('../services/coredb')
 const moment = require('moment')
 const uuidGenerator = require('uuid/v4')
 
+/* ================================================================================ */
+
 async function getAssignmentsByActivityId(ctx, next) {
   const activityId = ctx.params.activity_id
-  ctx.state.data = await coredb('assignment').select().where('activityId', activityId)
+  ctx.state.data =
+    await coredb('assignment')
+      .select()
+      .where('activityId', activityId)
 }
 
 async function getAssignmentByActivityIdAndAssignmentId(ctx, next) {
   const activityId = ctx.params.activity_id
   const assignmentId = ctx.params.assignment_id
-  ctx.state.data = await coredb('assignment').first().where({ 'activityId': activityId, 'assignmentId': assignmentId })
+  ctx.state.data =
+    await coredb('assignment')
+      .first()
+      .where({
+        'activityId': activityId,
+        'assignmentId': assignmentId
+      })
 }
 
 /**
- * 
  * Assignment (key: currentAssignmentId)
  *  - assignmentId
  *  - activityId
@@ -25,7 +35,6 @@ async function getAssignmentByActivityIdAndAssignmentId(ctx, next) {
  *  - imageData
  *  - createTime
  *  - lastVisitTime
- * 
  */
 
 async function postAssignmentWithActivityId(ctx, next) {
@@ -40,8 +49,19 @@ async function postAssignmentWithActivityId(ctx, next) {
     const imageData = JSON.stringify(result)
     const createTime = moment().format('YYYY-MM-DD HH:mm:ss')
     const lastVisitTime = createTime
-    await coredb('assignment').insert({ assignmentId: assignmentId, activityId: activityId, senderId: senderId, senderInfo: senderInfo, imageData: imageData, createTime: createTime, lastVisitTime: lastVisitTime })
-    await coredb('activity').update('currentAssignmentId', assignmentId).where('activityId', activityId)
+    await coredb('assignment')
+      .insert({
+        assignmentId: assignmentId,
+        activityId: activityId,
+        senderId: senderId,
+        senderInfo: senderInfo,
+        imageData: imageData,
+        createTime: createTime,
+        lastVisitTime: lastVisitTime
+      })
+    await coredb('activity')
+      .update('currentAssignmentId', assignmentId)
+      .where('activityId', activityId)
     // 返回 Assignment Id
     ctx.state.data = assignmentId
   } else {
@@ -49,6 +69,8 @@ async function postAssignmentWithActivityId(ctx, next) {
     ctx.state.code = -1
   }
 }
+
+/* ================================================================================ */
 
 module.exports = {
   getAssignmentsByActivityId,

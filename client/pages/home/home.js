@@ -51,11 +51,11 @@ Page({
   /* ================================================================================ */
 
   /**
-   * 绑定事件：点击 Grid
+   * 绑定事件：点击 grid
    */
 
   gridTap: function (e) {
-    console.log(`grid cell tap`)
+    console.log(`点击 grid`)
     const disciplineId = e.currentTarget.dataset.disciplineId
     loginService.ensureLoggedIn().then(
       () => this.getActivity(disciplineId)
@@ -63,18 +63,20 @@ Page({
   },
 
   gridTap2: function (e) {
-    console.log(`grid cell tap`)
+    console.log(`点击 grid`)
     const disciplineId = e.currentTarget.dataset.disciplineId
-    // 跳转至 Waiting Room 页面
-    wx.navigateTo({
-      url: `../waitingRoom/waitingRoom`,
-    })
+    // 跳转至 waitingRoom 页面
+    loginService.ensureLoggedIn().then(
+      () => wx.navigateTo({
+        url: `../waitingRoom/waitingRoom`,
+      })
+    )
   },
 
   /* ================================================================================ */
 
   /**
-   * 获取一条 Activity 数据
+   * 获取一条 activity 数据
    */
 
   getActivity: function (disciplineId) {
@@ -83,7 +85,7 @@ Page({
       title: msgs.enter_classroom_processing_title,
       mask: true
     })
-    // 创建一条 Activity 数据
+    // 创建一条 activity 数据
     qcloud.request({
       url: `${configs.weapp}/activities?discipline_id=${disciplineId}`,
       login: true,
@@ -91,7 +93,7 @@ Page({
       success: res => {
         // 隐藏 loading 提示框
         wx.hideLoading()
-        // 重新启动至 Activity 页面
+        // 重新启动至 activity 页面
         wx.reLaunch({
           url: `../activity/activity?activity_id=${res.data.data}`
         })
@@ -99,7 +101,7 @@ Page({
       fail: err => {
         // 隐藏 loading 提示框
         wx.hideLoading()
-        // 显示 “进入教室失败” 弹窗
+        // 显示失败弹窗
         wx.showModal({
           title: msgs.enter_classroom_fail_title,
           content: msgs.contact_us_to_report_bugs,

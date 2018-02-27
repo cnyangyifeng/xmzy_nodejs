@@ -10,7 +10,7 @@
     {
       "root": "packages/my",
       "pages": [
-        "pages/servicePlans/servicePlans"
+        "pages/purchase/purchase"
       ]
     }
   ],

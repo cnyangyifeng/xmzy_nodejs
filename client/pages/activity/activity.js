@@ -119,7 +119,7 @@ Page({
 
   onShareAppMessage: function () {
     // 设置转发信息的标题
-    let title;
+    let title
     if (this.data.activity) {
       const createDate = moment(this.data.activity.createTime).format('MMMDo dddd')
       const disciplineName = disciplines.find(e => {
