@@ -76,7 +76,6 @@ Page({
       login: true,
       success: res => {
         const arr = res.data.data // activities 原始数据
-        console.log(arr)
         if (arr.length > 0) {
           let activities = [], map = {}
           for (let i = 0; i < arr.length; i++) {

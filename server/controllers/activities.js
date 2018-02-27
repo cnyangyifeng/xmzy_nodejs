@@ -9,7 +9,7 @@ async function getMyActivities(ctx, next) {
   if (ctx.state.$wxInfo.loginState === 1) {
     const studentId = ctx.state.$wxInfo.userinfo.openId
     const pageNo = Number.parseInt(ctx.request.query['page_no'])
-    const limit = 1
+    const limit = 3
     const offset = pageNo * limit
     const endTime = moment().subtract(offset, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss')
     const startTime = moment().subtract(offset + limit, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss')
