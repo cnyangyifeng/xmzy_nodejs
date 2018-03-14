@@ -2,9 +2,11 @@
   "pages": [
     "pages/home/home",
     "pages/me/me",
-    "pages/waitingRoom/waitingRoom",
-    "pages/activity/activity",
-    "pages/reviews/reviews"
+    "pages/navigator/navigator",
+    "pages/favorites/favorites",
+    "pages/interview/interview",
+    "pages/reviews/reviews",
+    "pages/activity/activity"
   ],
   "subPackages": [
     {

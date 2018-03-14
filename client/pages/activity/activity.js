@@ -18,7 +18,6 @@ Page({
   data: {
 
     /*
-     *
      * activity
      *  - activityId
      *  - disciplineId
@@ -39,22 +38,17 @@ Page({
      *    - lastVisitTime
      *  - createTime
      *  - lastVisitTime
-     * 
      */
 
     activity: null, // 当前 activity
-    activityId: '', // 当前 activity 的 id
+    activityId: '', // 当前 activityId
     studentInfo: null, // 当前 studentInfo
     tutorInfo: null, // 当前 tutorInfo
     assignment: null, // 当前 assignment
 
-    /* 当前 activity, assignment 相关的 xmessages */
-
-    xmessages: [],
+    xmessages: [], // 当前 activity, assignment 相关的 xmessages
 
     recorderStartTime: 0, // 开始录音的时间，用于计算录音时长
-
-    /* Page UI 数据 */
 
     backdropWidth: 0, // backdrop 的宽度
     backdropHeight: 0, // backdrop 的高度
@@ -455,10 +449,10 @@ Page({
       fail: err => {
         // 隐藏 loading 提示框
         wx.hideLoading()
-        // 请求失败，则显示失败弹框
+        // 请求失败，则显示失败消息提示框
         wx.showToast({
           title: msgs.send_assignment_fail_title,
-          image: '/assets/images/fail.png',
+          image: '/assets/images/warning.png',
           mask: true
         })
       }
@@ -498,7 +492,7 @@ Page({
         // 请求失败，则显示失败弹框
         wx.showToast({
           title: msgs.msgs.send_xmessage_fail_title,
-          image: '/assets/images/fail.png',
+          image: '/assets/images/warning.png',
           mask: true
         })
       }

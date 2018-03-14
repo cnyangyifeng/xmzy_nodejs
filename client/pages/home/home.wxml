@@ -1,19 +1,23 @@
 <view class="page">
-  <view class="page__hd_inverse">
-    <!-- <text class="page__desc_inverse">甄选全国优秀教师\n中小学家庭作业同步辅导\n每晚 6:00 - 10:00\n不见不散</text> -->
-    <block wx:if="{{userInfo}}">
-      <image class="logo" src="{{userInfo.avatarUrl}}"></image>
+  <view class="page-hd">
+    <block wx:if="{{student.studentInfo}}">
+      <view class="student-view">
+        <image class="student-avatar animated fadeInDown" src="{{student.studentInfo.avatarUrl}}"></image>
+      </view>
+      <text class="page-hd-desc animated fadeInUp">中小学家庭作业同步答疑</text>
     </block>
     <block wx:else>
-      <image class="logo" src="../../assets/images/logo.jpg"></image>
+      <view class="student-view">
+        <image class="student-avatar animated fadeInDown" src="../../assets/images/logo.jpg"></image>
+      </view>
+      <text class="page-hd-desc animated fadeInUp">中小学家庭作业同步答疑</text>
     </block>
-    <text class="page__desc_inverse">中小学课后作业在线辅导</text>
   </view>
-  <view class="page__bd">
+  <view class="page-bd">
     <view class="weui-grids">
       <block wx:for="{{disciplines}}" wx:key="id">
-        <view class="weui-grid" hover-class="weui-grid_active" data-discipline-id="{{item.id}}" bindtap="gridTap">
-          <image class="weui-grid__icon" src="../../assets/images/{{item.id}}.svg"></image>
+        <view class="weui-grid" hover-class="weui-grid_active" data-discipline-id="{{item.id}}" bindtap="gridTap2">
+          <image class="weui-grid__icon" src="../../assets/images/disciplines/{{item.id}}.svg"></image>
           <view class="weui-grid__label">{{item.name}}</view>
         </view>
       </block>

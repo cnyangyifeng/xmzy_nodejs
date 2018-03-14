@@ -1,0 +1,33 @@
+<view class="page">
+  <view class="page-hd">
+    <view class="page-hd-desc">圣人无常师</view>
+  </view>
+  <view class="page-bd">
+    <view hidden="{{!loading}}" class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips"></view>
+    </view>
+    <block wx:for="{{activities}}" wx:key="createDate">
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__hd">{{item.createDate}}</view>
+        <view class="weui-panel__bd">
+          <block wx:for="{{item.data}}" wx:key="activityId">
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-activity-id="{{item.activityId}}" bindtap="activityCellTap">
+              <view class="weui-cell__hd">
+                <image class="weui-cell__hd_icon" src="../../assets/images/disciplines/{{item.disciplineId}}.svg"></image>
+              </view>
+              <view class="weui-cell__bd with-badge">
+                <text>{{item.disciplineName}}</text>
+                <view class="weui-badge">进行中</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access">{{item.studentInfo.nickName}}</view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+    <view hidden="{{loading}}" class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line weui-loadmore__tips_in-dot"></view>
+    </view>
+  </view>
+</view>

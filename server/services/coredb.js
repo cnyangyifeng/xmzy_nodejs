@@ -3,11 +3,11 @@ const configs = require('../config')
 module.exports = require('knex')({
   client: 'mysql',
   connection: {
-    host: configs.mysql.host,
-    port: configs.mysql.port,
-    user: configs.mysql.user,
-    password: configs.mysql.pass,
-    database: configs.mysql.coredb,
-    charset: configs.mysql.char
+    host: configs.coredb.host,
+    port: configs.coredb.port,
+    user: configs.coredb.user,
+    password: configs.coredb.pass,
+    database: configs.coredb.db,
+    charset: configs.coredb.char
   }
 })

@@ -1,0 +1,45 @@
+<view class="navigator-page">
+  <view class="navigator-page-hd">
+    <view class="student-view">
+      <image class="student-avatar animated fadeInLeft" src="{{student.studentInfo.avatarUrl}}"></image>
+      <view class="student-info animated fadeInRight">
+        <view class="student-nick-name">{{student.studentInfo.nickName}}</view>
+        <view class="student-assets">
+          <view class="student-asset" bindtap="addHeartButtonTap">
+            <image class="student-asset-icon left" src="/assets/images/heart_fill.svg"></image>
+            <view class="student-asset-value">{{student.hearts}}</view>
+            <image class="student-asset-icon right" src="/assets/images/add_fill.svg"></image>
+          </view>
+          <view class="student-asset">
+            <image class="student-asset-icon left" src="/assets/images/diamond_fill.svg"></image>
+            <view class="student-asset-value">{{student.diamonds}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="navigator-page-bd">
+    <view class="navigator-row">
+      <view class="navigator-cell favorite-tutors" hover-class="animated zoomOut" bindtap="favoriteTutorsCellTap">
+        <image class="navigator-cell-icon" src="/assets/images/star.svg"></image>
+        <view>我喜欢的</view>
+      </view>
+      <button class="navigator-cell invite-tutor btn-fix" open-type="share">
+        <image class="navigator-cell-icon" src="/assets/images/send_yellow.svg"></image>
+        <view>邀请老师</view>
+      </button>
+    </view>
+    <view class="navigator-row tall">
+      <view class="navigator-cell quick-match" hover-class="animated zoomOut" bindtap="quickMatchCellTap">
+        <image class="navigator-cell-icon" src="/assets/images/flashlight.svg"></image>
+        <view>快速匹配</view>
+      </view>
+    </view>
+    <view class="navigator-row">
+      <view class="navigator-cell contacted-tutors" hover-class="animated zoomOut" bindtap="contactedTutorsCellTap">
+        <image class="navigator-cell-icon" src="/assets/images/reviews.svg"></image>
+        <view>之前的辅导记录</view>
+      </view>
+    </view>
+  </view>
+</view>

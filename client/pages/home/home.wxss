@@ -1,4 +1,13 @@
-.logo {
+@import '../../assets/styles/animate.wxss';
+
+.student-view {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.student-avatar {
+  flex: none;
   width: 160rpx;
   height: 160rpx;
   margin-bottom: 64rpx;

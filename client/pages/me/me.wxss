@@ -1,15 +1,49 @@
-.fortune {
-  display: flex;
-  align-items: center;
-  margin-right: 30rpx;
-}
-
-.fortune-icon {
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 10rpx;
-}
+@import '../../assets/styles/animate.wxss';
 
 .unlogged {
   color: #666;
+}
+
+.student-nick-name {
+  max-width: 320rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* .student-assets */
+
+.student-assets {
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.student-asset {
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+  padding: 10rpx 0;
+  border-radius: 40rpx;
+  background-color: #efeff4;
+}
+
+.student-asset-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.student-asset-icon.left {
+  margin-left: 20rpx;
+}
+
+.student-asset-icon.right {
+  margin-right: 20rpx;
+}
+
+.student-asset-value {
+  margin: 0 30rpx;
+  color: #333;
+  font-size: 28rpx;
+  font-weight: 600;
 }

@@ -9,8 +9,15 @@ const configs = {
     port: 3306,
     user: 'root',
     db: 'cAuth',
-    coredb: 'xmzy_core_db',
     pass: 'dbdlX3yt', // prod
+    char: 'utf8mb4'
+  },
+  coredb: {
+    host: 'gz-cdb-hy2472r9.sql.tencentcdb.com', // internet ip
+    port: 63055,
+    user: 'weapp_xmzy',
+    db: 'xmzy_core_db',
+    pass: '2018^xmzy',
     char: 'utf8mb4'
   },
   cos: {

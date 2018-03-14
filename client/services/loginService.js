@@ -1,7 +1,7 @@
 const configs = require('../config')
 const msgs = require('../msg')
 const qcloud = require('../vendor/wafer2-client-sdk/index')
-const UserInfo = require('./userInfo')
+const Student = require('./student')
 
 /**
  * 确保用户始终处于登录状态
@@ -19,47 +19,22 @@ var ensureLoggedIn = function () {
         title: msgs.login_processing_title,
         mask: true
       })
-      // 执行一次登录操作
-      qcloud.login({
-        // 登录成功
-        success: userInfo => {
-          // 首次登录，返回用户信息
-          if (userInfo) {
-            // 更新本地缓存数据 userInfo
-            UserInfo.set(userInfo)
-            // 隐藏 loading 提示框
-            wx.hideLoading()
-            // 操作成功
-            resolve()
-          } else {
-            // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
-            qcloud.request({
-              url: `${configs.weapp}/user`,
-              login: true,
-              success: res => {
-                // 更新本地缓存数据 userInfo
-                UserInfo.set(res.data.data)
-                // 隐藏 loading 提示框
-                wx.hideLoading()
-                // 操作成功
-                resolve()
-              },
-              fail: err => {
-                // 隐藏 loading 提示框
-                wx.hideLoading()
-                // 显示 “登录失败” 弹窗
-                wx.showModal({
-                  title: msgs.login_fail_title,
-                  content: err.message,
-                  showCancel: false
-                })
-                // 操作失败
-                // reject()
-              }
-            })
-          }
+      // 为了获取更多的用户信息，例如 hearts, praises
+      // 放弃 qcloud.login, 直接使用 qcloud.request
+      qcloud.request({
+        url: `${configs.weapp}/student`,
+        login: true,
+        success: res => {
+          // 更新本地缓存数据 student
+          const student = res.data.data
+          const studentInfo = JSON.parse(student.studentInfo)
+          student.studentInfo = studentInfo
+          Student.set(student)
+          // 隐藏 loading 提示框
+          wx.hideLoading()
+          // 操作成功
+          resolve()
         },
-        // 登录失败
         fail: err => {
           // 隐藏 loading 提示框
           wx.hideLoading()

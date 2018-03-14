@@ -1,21 +1,21 @@
 <view class="page">
-  <view class="page__hd_inverse">
-    <view class="page__desc_inverse">
+  <view class="page-hd">
+    <view class="page-hd-desc">
       <text>骐骥一跃 不能十步\n驽马十驾 功在不舍</text>
     </view>
   </view>
-  <view class="page__bd">
+  <view class="page-bd">
     <block wx:for="{{servicePlans}}" wx:key="spid">
       <view class="service-plan" bindtap="buyButtonTap">
-        <view class="service-plan__hd">
-          <text class="vouchers-count">{{item.vouchersCount}}</text>
-          <text>张券</text>
+        <view class="service-plan-hd">
+          <image class="heart-icon" src="/assets/images/heart_fill.svg"></image>
+          <text class="hearts">{{item.hearts}}</text>
         </view>
-        <view class="service-plan__bd">
-          <text>￥</text>
+        <view class="service-plan-bd">
           <text class="price">{{item.price}}</text>
+          <text class="cny">元</text>
         </view>
-        <view class="service-plan__ft">
+        <view class="service-plan-ft">
           <button class="weui-btn buy-btn" type="primary">购买</button>
         </view>
       </view>

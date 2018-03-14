@@ -1,74 +1,73 @@
 <view class="page">
-  <view class="page__bd">
-    <view class="weui-cells__title"></view>
-    <view class="weui-cells weui-cells_after-title">
-      <block wx:if="{{userInfo}}">
-        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="userInfoCellTap">
-          <view class="weui-cell__hd">
-            <image class="weui-cell__hd_large_icon" src="{{userInfo.avatarUrl}}"></image>
-          </view>
-          <view class="weui-cell__bd">
-            <view>{{userInfo.nickName}}</view>
-            <view class="weui-cell__bd_desc">
-              <view class="fortune">
-                <image class="fortune-icon" src="/assets/images/heart_fill.svg"></image>
-                <text>{{hearts}}</text>
-              </view>
-              <view class="fortune">
-                <image class="fortune-icon" src="/assets/images/praise_fill.svg"></image>
-                <text>{{diamonds}}</text>
-              </view>
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
+    <block wx:if="{{student.studentInfo}}">
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__hd animated fadeInLeft">
+          <image class="weui-cell__hd_large_icon" src="{{student.studentInfo.avatarUrl}}"></image>
+        </view>
+        <view class="weui-cell__bd animated fadeInRight">
+          <view class="student-nick-name">{{student.studentInfo.nickName}}</view>
+          <view class="student-assets">
+            <view class="student-asset" bindtap="addHeartButtonTap">
+              <image class="student-asset-icon left" src="/assets/images/heart_fill.svg"></image>
+              <view class="student-asset-value">{{student.hearts}}</view>
+              <image class="student-asset-icon right" src="/assets/images/add_grey_fill.svg"></image>
+            </view>
+            <view class="student-asset">
+              <image class="student-asset-icon left" src="/assets/images/diamond_fill.svg"></image>
+              <view class="student-asset-value">{{student.diamonds}}</view>
             </view>
           </view>
         </view>
-      </block>
-      <block wx:else>
-        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="unloggedCellTap">
-          <view class="weui-cell__hd">
-            <image class="weui-cell__hd_large_icon" src="../../assets/images/logo.jpg"></image>
-          </view>
-          <view class="weui-cell__bd">
-            <view class="unlogged">未登录用户</view>
-          </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="unloggedCellTap">
+        <view class="weui-cell__hd animated fadeInLeft">
+          <image class="weui-cell__hd_large_icon" src="../../assets/images/logo.jpg"></image>
         </view>
-      </block>
+        <view class="weui-cell__bd animated fadeInRight">
+          <view class="unlogged">未登录用户</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="reviewsCellTap">
+      <view class="weui-cell__hd">
+        <image class="weui-cell__hd_icon" src="../../assets/images/reviews_fill.svg"></image>
+      </view>
+      <view class="weui-cell__bd">作业本</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
-    <view class="weui-cells__title"></view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="reviewsCellTap">
-        <view class="weui-cell__hd">
-          <image class="weui-cell__hd_icon" src="../../assets/images/reviews_fill.svg"></image>
-        </view>
-        <view class="weui-cell__bd">作业本</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </view>
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="purchaseCellTap">
+      <view class="weui-cell__hd">
+        <image class="weui-cell__hd_icon" src="../../assets/images/purchase_fill.svg"></image>
       </view>
+      <view class="weui-cell__bd">充值</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
-    <view class="weui-cells__title"></view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="purchaseCellTap">
-        <view class="weui-cell__hd">
-          <image class="weui-cell__hd_icon" src="../../assets/images/purchase_fill.svg"></image>
-        </view>
-        <view class="weui-cell__bd">充值</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </view>
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="ccCellTap">
+      <view class="weui-cell__hd">
+        <image class="weui-cell__hd_icon" src="../../assets/images/cc_fill.svg"></image>
       </view>
+      <view class="weui-cell__bd">客服</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
-    <view class="weui-cells__title"></view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="ccCellTap">
-        <view class="weui-cell__hd">
-          <image class="weui-cell__hd_icon" src="../../assets/images/cc_fill.svg"></image>
-        </view>
-        <view class="weui-cell__bd">客服</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="setupCellTap">
+      <view class="weui-cell__hd">
+        <image class="weui-cell__hd_icon" src="../../assets/images/setup_fill.svg"></image>
       </view>
-      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="setupCellTap">
-        <view class="weui-cell__hd">
-          <image class="weui-cell__hd_icon" src="../../assets/images/setup_fill.svg"></image>
-        </view>
-        <view class="weui-cell__bd">设置</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </view>
+      <view class="weui-cell__bd">设置</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
   </view>
 </view>

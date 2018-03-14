@@ -5,28 +5,8 @@ const uuidGenerator = require('uuid/v4')
 
 /* ================================================================================ */
 
-async function getMyActivities(ctx, next) {
-  if (ctx.state.$wxInfo.loginState === 1) {
-    const studentId = ctx.state.$wxInfo.userinfo.openId
-    const pageNo = Number.parseInt(ctx.request.query['page_no'])
-    const limit = 3
-    const offset = pageNo * limit
-    const endTime = moment().subtract(offset, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss')
-    const startTime = moment().subtract(offset + limit, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss')
-    console.log(`===========> ${startTime} ${endTime}`)
-    ctx.state.data =
-      await coredb('activity')
-        .select()
-        .whereRaw('studentId = ? and createTime between ? and ?', [studentId, startTime, endTime])
-        .orderBy('createTime', 'desc')
-  } else {
-    // 登录态已过期
-    ctx.state.code = -1
-  }
-}
-
 /**
- * Activity
+ * activity
  *  - activityId
  *  - disciplineId
  *  - studentId
@@ -48,6 +28,26 @@ async function getMyActivities(ctx, next) {
  *  - lastVisitTime
  */
 
+async function getMyActivities(ctx, next) {
+  if (ctx.state.$wxInfo.loginState === 1) {
+    const studentId = ctx.state.$wxInfo.userinfo.openId
+    const pageNo = Number.parseInt(ctx.request.query['page_no'])
+    const limit = 3
+    const offset = pageNo * limit
+    const endTime = moment().subtract(offset, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss')
+    const startTime = moment().subtract(offset + limit, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss')
+    console.log(`===========> ${startTime} ${endTime}`)
+    ctx.state.data =
+      await coredb('activity')
+        .select()
+        .whereRaw('studentId = ? and createTime between ? and ?', [studentId, startTime, endTime])
+        .orderBy('createTime', 'desc')
+  } else {
+    // 登录态已过期
+    ctx.state.code = -1
+  }
+}
+
 async function getActivityByActivityId(ctx, next) {
   const activityId = ctx.params.activity_id
   const activity =
@@ -60,11 +60,11 @@ async function getActivityByActivityId(ctx, next) {
       await coredb('assignment')
         .first()
         .where('assignmentId', activity.currentAssignmentId)
-    if (assignment == undefined) {
-      assignment = await initDefaultAssignment(activity)
+    if (assignment === undefined) {
+      assignment = await createDefaultAssignment(activity)
     }
   } else {
-    assignment = await initDefaultAssignment(activity)
+    assignment = await createDefaultAssignment(activity)
   }
   activity['currentAssignment'] = JSON.stringify(assignment)
   ctx.state.data = activity
@@ -96,8 +96,10 @@ async function postActivity(ctx, next) {
 
 /* ================================================================================ */
 
-async function initDefaultAssignment(activity) {
-  // 创建一条默认的 Assignment 数据
+/**
+ * 创建一条默认的 assignment 数据
+ */
+async function createDefaultAssignment(activity) {
   const assignmentId = uuidGenerator()
   const activityId = activity.activityId
   const senderId = JSON.parse(activity.studentInfo).openId

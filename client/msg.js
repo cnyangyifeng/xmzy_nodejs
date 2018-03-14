@@ -12,13 +12,13 @@ const msgs = {
   enter_classroom_fail_title: `进入教室失败`,
   enter_classroom_processing_title: `准备教室`,
 
-  loading_title: `正在加载`,
+  loading_title: `加载中`,
   loading_activity_title: `准备教室`,
   loading_assignment_title: `准备作业`,
   loading_xmessages_title: `接收消息`,
 
   login_fail_title: `登录失败`,
-  login_processing_title: `正在登录`,
+  login_processing_title: `登录中`,
 
   record_duration_too_short_title: `按住说话`,
   record_duration_too_short_content: `说话时间太短，对方会听不清楚哦~\n请按住 “说话” 按钮，再说一遍。`,
@@ -29,10 +29,7 @@ const msgs = {
   send_xmessage_processing_title: `发送消息`,
 
   send_assignment_fail_title: `上传作业失败`,
-  send_assignment_processing_title: `上传作业`,
-
-  // upload_fail_title: `上传失败`,
-  // upload_processing_title: `正在上传`
+  send_assignment_processing_title: `上传作业`
 
 }
 

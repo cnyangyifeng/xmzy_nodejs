@@ -1,5 +1,5 @@
 <view class="activity-page">
-  <view class="activity-page__rt">
+  <view class="activity-page-rt">
     <view class="sidebar">
       <view class="sidebar-avatar">
         <image class="sidebar-avatar-image" src="{{tutorInfo.avatarUrl}}"></image>
@@ -19,14 +19,14 @@
     </scroll-view>
     <view class="sidebar bottom">
       <view class="sidebar-btn" bindtap="closeButtonTap">
-        <image class="sidebar-btn-image" src="../../assets/images/close_fill.svg"></image>
+        <image class="sidebar-btn-image" src="../../assets/images/close.svg"></image>
       </view>
-      <button class="sidebar-btn share-btn-fix" open-type="share">
-        <image class="sidebar-btn-image" src="../../assets/images/share_fill.svg"></image>
+      <button class="sidebar-btn sidebar-btn-fix" open-type="share">
+        <image class="sidebar-btn-image" src="../../assets/images/send.svg"></image>
       </button>
     </view>
   </view>
-  <view class="activity-page__lf">
+  <view class="activity-page-lf">
     <view class="workspace">
       <canvas class="workspace-layer" id="backdrop" canvas-id="backdrop" disable-scroll bindtouchstart="backdropTouchStart" bindtouchmove="backdropTouchMove" bindtouchend="backdropTouchEnd"></canvas>
     </view>

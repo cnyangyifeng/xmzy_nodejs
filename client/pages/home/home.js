@@ -3,7 +3,7 @@ const disciplines = require('../../services/disciplines')
 const loginService = require('../../services/loginService')
 const msgs = require('../../msg')
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
-const UserInfo = require('../../services/userInfo')
+const Student = require('../../services/student')
 
 Page({
 
@@ -12,15 +12,8 @@ Page({
    */
 
   data: {
-
-    /* 学科列表 */
-
-    disciplines: [],
-
-    /* 用户信息 */
-
-    userInfo: null,
-
+    disciplines: [], // 学科列表
+    student: null, // 当前 student
   },
 
   /* ================================================================================ */
@@ -33,6 +26,7 @@ Page({
     this.setData({
       disciplines: disciplines
     })
+
   },
 
   /**
@@ -40,11 +34,26 @@ Page({
    */
 
   onShow: function () {
-    if (!this.data.userInfo) {
-      // 从本地缓存中读取 userInfo，更新页面数据 userInfo
-      this.setData({
-        userInfo: UserInfo.get()
-      })
+    // 从本地缓存中读取 student，更新页面数据 student
+    this.setData({
+      student: Student.get()
+    })
+  },
+
+  /**
+   * 用户点击右上角转发
+   */
+
+  onShareAppMessage: function () {
+    // 设置转发信息
+    return {
+      path: `pages/home/home`,
+      success: res => {
+        console.log(`转发成功`)
+      },
+      fail: err => {
+        console.log(`取消转发`)
+      }
     }
   },
 
@@ -65,10 +74,10 @@ Page({
   gridTap2: function (e) {
     console.log(`点击 grid`)
     const disciplineId = e.currentTarget.dataset.disciplineId
-    // 跳转至 waitingRoom 页面
+    // 跳转至 navigator 页面
     loginService.ensureLoggedIn().then(
       () => wx.navigateTo({
-        url: `../waitingRoom/waitingRoom`,
+        url: `../navigator/navigator?discipline_id=${disciplineId}`,
       })
     )
   },
@@ -101,7 +110,7 @@ Page({
       fail: err => {
         // 隐藏 loading 提示框
         wx.hideLoading()
-        // 显示失败弹窗
+        // 请求失败，则显示失败弹窗
         wx.showModal({
           title: msgs.enter_classroom_fail_title,
           content: msgs.contact_us_to_report_bugs,

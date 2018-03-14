@@ -1,4 +1,4 @@
-const host = 'http://localhost:5757'
+const host = 'https://xvnunje5.qcloud.la';
 const weapp = `${host}/weapp`
 
 const configs = {

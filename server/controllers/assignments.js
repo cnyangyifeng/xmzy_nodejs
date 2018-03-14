@@ -5,6 +5,18 @@ const uuidGenerator = require('uuid/v4')
 
 /* ================================================================================ */
 
+/**
+ * assignment (key: currentAssignmentId)
+ *  - assignmentId
+ *  - activityId
+ *  - senderId
+ *  - senderInfo (key: openId)
+ *  - xmStatus
+ *  - imageData
+ *  - createTime
+ *  - lastVisitTime
+ */
+
 async function getAssignmentsByActivityId(ctx, next) {
   const activityId = ctx.params.activity_id
   ctx.state.data =
@@ -25,23 +37,11 @@ async function getAssignmentByActivityIdAndAssignmentId(ctx, next) {
       })
 }
 
-/**
- * Assignment (key: currentAssignmentId)
- *  - assignmentId
- *  - activityId
- *  - senderId
- *  - senderInfo (key: openId)
- *  - xmStatus
- *  - imageData
- *  - createTime
- *  - lastVisitTime
- */
-
 async function postAssignmentWithActivityId(ctx, next) {
   if (ctx.state.$wxInfo.loginState === 1) {
     // 上传文件至 COS
     const result = await uploader(ctx.req)
-    // 创建一条 Assignment 数据
+    // 创建一条 assignment 数据
     const assignmentId = uuidGenerator()
     const activityId = ctx.params.activity_id
     const senderId = ctx.state.$wxInfo.userinfo.openId
@@ -62,7 +62,7 @@ async function postAssignmentWithActivityId(ctx, next) {
     await coredb('activity')
       .update('currentAssignmentId', assignmentId)
       .where('activityId', activityId)
-    // 返回 Assignment Id
+    // 返回 assignmentId
     ctx.state.data = assignmentId
   } else {
     // 登录态已过期

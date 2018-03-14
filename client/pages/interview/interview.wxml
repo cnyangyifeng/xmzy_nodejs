@@ -1,0 +1,62 @@
+<view class="interview-page">
+  <view class="interview-page-hd">
+    <view class="student-view animated fadeInDown" hidden="{{!tutor}}">
+      <image class="student-avatar" src="{{student.studentInfo.avatarUrl}}"></image>
+      <view class="student-info">
+        <view class="student-nick-name">{{student.studentInfo.nickName}}</view>
+        <view class="student-assets">
+          <view class="student-asset" bindtap="addHeartButtonTap">
+            <image class="student-asset-icon left" src="/assets/images/heart_fill.svg"></image>
+            <view class="student-asset-value">{{student.hearts}}</view>
+            <image class="student-asset-icon right" src="/assets/images/add_fill.svg"></image>
+          </view>
+          <view class="student-asset">
+            <image class="student-asset-icon left" src="/assets/images/diamond_fill.svg"></image>
+            <view class="student-asset-value">{{student.diamonds}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="interview-page-bd">
+    <view class="loader-view" hidden="{{tutor}}">
+      <view class="loader-halo spinner"></view>
+      <image class="loader-icon" src="../../assets/images/logo.jpg"></image>
+    </view>
+    <view class="tutor-view animated bounceIn" hidden="{{!tutor}}">
+      <image class="tutor-avatar" src="{{tutor.tutorInfo.avatarUrl}}"></image>
+      <view class="tutor-nick-name">{{tutor.tutorInfo.nickName}}</view>
+      <view class="tutor-intro">{{tutor.university}}</view>
+      <view class="tutor-intro">{{tutor.major}}</view>
+      <button class="tutor-greetings-btn" bindtap="tutorGreetingsButtonTap">
+        <image class="tutor-greetings-btn-icon" src="../../assets/images/horn_fill.svg"></image>
+      </button>
+    </view>
+  </view>
+  <view class="interview-page-ft">
+    <view class="toolbar-view animated fadeInUp" hidden="{{!tutor}}">
+      <view class="action-btn-wrapper">
+        <view class="action-btn-space"></view>
+        <button class="action-btn refresh" bindtap="refreshButtonTap">
+          <image class="action-btn-icon" src="../../assets/images/refresh.svg"></image>
+        </button>
+        <view class="action-btn-label">换一位</view>
+      </view>
+      <view class="action-btn-wrapper">
+        <view class="action-btn-space"></view>
+        <button class="action-btn enter" bindtap="enterButtonTap">
+          <image class="action-btn-icon" src="../../assets/images/enter.svg"></image>
+        </button>
+        <view class="action-btn-label">开始答疑</view>
+      </view>
+    </view>
+  </view>
+  <view class="grade-selector" hidden="{{gradeSelectorHidden}}">
+    <view class="grade-panel animated bounceInRight">
+      <text class="question">亲爱的同学，请问你目前在读的是</text>
+      <block wx:for="{{grades}}" wx:key="id">
+        <button class="weui-btn" type="default" data-grade-id="{{item.id}}" bindtap="gradeButtonTap">{{item.name}}</button>
+      </block>
+    </view>
+  </view>
+</view>
