@@ -1,6 +1,6 @@
 // ajax 服务路由集合
 const router = require('koa-router')({
-  prefix: '/weapp'
+  // prefix: '/weapp'
 })
 const controllers = require('../controllers')
 
@@ -34,6 +34,7 @@ router.post('/message', controllers.message.post)
 router.get('/student', validationMiddleware, controllers.students.getStudent)
 router.get('/students/:student_id', controllers.students.getStudentByStudentId)
 router.post('/student/grade_id/:grade_id', validationMiddleware, controllers.students.postGradeId)
+router.post('/student/tutor_mode/:tutor_mode', validationMiddleware, controllers.students.postTutorMode)
 
 // --- tutors --- //
 router.get('/tutor', validationMiddleware, controllers.tutors.getTutor)
@@ -52,5 +53,8 @@ router.post('/activities/:activity_id/assignments', validationMiddleware, contro
 // --- xmessages --- //
 router.get('/activities/:activity_id/assignments/:assignment_id/xmessages', controllers.xmessages.getXmessagesByActivityIdAndAssignmentId)
 router.post('/activities/:activity_id/assignments/:assignment_id/xmessages', validationMiddleware, controllers.xmessages.postXmessageWithActivityIdAndAssignmentId)
+
+// --- pnglatex --- //
+router.get('/pnglatex', controllers.pnglatex.parseFormula)
 
 module.exports = router

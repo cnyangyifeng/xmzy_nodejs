@@ -22,7 +22,7 @@
     <view class="navigator-row">
       <view class="navigator-cell favorite-tutors" hover-class="animated zoomOut" bindtap="favoriteTutorsCellTap">
         <image class="navigator-cell-icon" src="/assets/images/star.svg"></image>
-        <view>我喜欢的</view>
+        <view>我的收藏</view>
       </view>
       <button class="navigator-cell invite-tutor btn-fix" open-type="share">
         <image class="navigator-cell-icon" src="/assets/images/send_yellow.svg"></image>
@@ -38,7 +38,7 @@
     <view class="navigator-row">
       <view class="navigator-cell contacted-tutors" hover-class="animated zoomOut" bindtap="contactedTutorsCellTap">
         <image class="navigator-cell-icon" src="/assets/images/reviews.svg"></image>
-        <view>之前的辅导记录</view>
+        <view>之前的作业记录</view>
       </view>
     </view>
   </view>

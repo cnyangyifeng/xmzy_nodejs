@@ -62,6 +62,7 @@ CREATE TABLE `student` (
   `gradeId` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `hearts` int(11) NOT NULL DEFAULT '1',
   `diamonds` int(11) NOT NULL DEFAULT '0',
+  `tutorMode` tinyint(1) NOT NULL DEFAULT '0',
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastVisitTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`studentId`) USING BTREE

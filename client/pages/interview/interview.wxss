@@ -3,12 +3,12 @@
 /* .interview-page */
 
 .interview-page {
-  background-color: #22292c;
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
   margin: 0;
+  background-color: #22292c;
 }
 
 /*= .interview-page-hd =*/

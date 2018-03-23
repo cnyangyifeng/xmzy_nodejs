@@ -4,13 +4,13 @@
       <view class="student-view">
         <image class="student-avatar animated fadeInDown" src="{{student.studentInfo.avatarUrl}}"></image>
       </view>
-      <text class="page-hd-desc animated fadeInUp">中小学家庭作业同步答疑</text>
+      <text class="page-hd-desc animated fadeInUp">中小学家庭作业同步检查</text>
     </block>
     <block wx:else>
       <view class="student-view">
         <image class="student-avatar animated fadeInDown" src="../../assets/images/logo.jpg"></image>
       </view>
-      <text class="page-hd-desc animated fadeInUp">中小学家庭作业同步答疑</text>
+      <text class="page-hd-desc animated fadeInUp">中小学家庭作业同步检查</text>
     </block>
   </view>
   <view class="page-bd">

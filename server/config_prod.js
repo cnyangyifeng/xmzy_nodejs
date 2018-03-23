@@ -5,11 +5,12 @@ const configs = {
   appSecret: '381528546bddfa148164a5c31e5f0a71',
   useQcloudLogin: true,
   mysql: {
-    host: 'localhost', // prod
-    port: 3306,
-    user: 'root',
+    host: 'gz-cdb-hy2472r9.sql.tencentcdb.com', // prod
+    port: 63055,
+    user: 'weapp_xmzy',
     db: 'cAuth',
-    pass: 'dbdlX3yt', // prod
+    pass: '2018^xmzy', // prod
+    // pass: 'dbdlX3yt', // prod
     char: 'utf8mb4'
   },
   coredb: {
@@ -19,6 +20,11 @@ const configs = {
     db: 'xmzy_core_db',
     pass: '2018^xmzy',
     char: 'utf8mb4'
+  },
+  redis: {
+    host: '10.66.161.154', // qcloud intranet ip
+    port: '6379',
+    pass: 'crs-m6jrx2id:2018^xmzy'
   },
   cos: {
     region: 'ap-guangzhou',

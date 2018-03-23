@@ -47,3 +47,28 @@
   font-size: 28rpx;
   font-weight: 600;
 }
+
+.contact-btn {
+  border-top: 1rpx solid #d9d9d9;
+  border-radius: 0;
+  background-color: #fff !important;
+  font-size: 17px;
+  text-align: left;
+  line-height: normal;
+}
+
+.contact-btn-active {
+  background-color: #d9d9d9 !important;
+}
+
+.contact-btn::after {
+  border: none;
+}
+
+.tutor-mode-on {
+  color: #09bb07;
+}
+
+.tutor-mode-off {
+  color: #999;
+}

@@ -6,6 +6,7 @@ const { message: { checkSignature } } = require('../qcloud')
 async function get(ctx, next) {
   const { signature, timestamp, nonce, echostr } = ctx.query
   if (checkSignature(signature, timestamp, nonce)) {
+    console.log(`=====> ${echostr}`)
     ctx.body = echostr
   } else {
     ctx.body = 'ERR_WHEN_CHECK_SIGNATURE'

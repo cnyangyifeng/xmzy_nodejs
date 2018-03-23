@@ -9,26 +9,18 @@ var authHeader = function () {
 }
 
 var exports = module.exports = {
-
   // login
-
   login: login.login,
   setLoginUrl: login.setLoginUrl,
   LoginError: login.LoginError,
-
   // session
-
   getSession: Session.get,
   clearSession: Session.clear,
-
   // request
-
   request: request.request,
   RequestError: request.RequestError,
   authHeader: authHeader,
-
   // tunnel
-
   Tunnel: Tunnel
 
 };

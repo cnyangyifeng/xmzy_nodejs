@@ -1,5 +1,5 @@
-const host = 'https://xvnunje5.qcloud.la';
-const weapp = `${host}/weapp`
+const host = 'https://85585684.xiongmaozuoye.club';
+const weapp = `${host}`
 
 const configs = {
   host,

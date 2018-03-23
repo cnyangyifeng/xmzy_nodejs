@@ -54,6 +54,23 @@ async function postGradeId(ctx, next) {
   }
 }
 
+async function postTutorMode(ctx, next) {
+  if (ctx.state.$wxInfo.loginState === 1) {
+    const studentId = ctx.state.$wxInfo.userinfo.openId
+    const tutorMode = parseInt(ctx.params.tutor_mode)
+    console.log(`tutorMode `, tutorMode)
+    await coredb('student')
+      .update({
+        tutorMode: tutorMode
+      })
+      .where('studentId', studentId)
+    ctx.state.data = tutorMode
+  } else {
+    // 登录态已过期
+    ctx.state.code = -1
+  }
+}
+
 /* ================================================================================ */
 
 /**
@@ -80,5 +97,6 @@ async function createDefaultStudent(studentInfo) {
 module.exports = {
   getStudent,
   getStudentByStudentId,
-  postGradeId
+  postGradeId,
+  postTutorMode
 }

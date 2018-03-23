@@ -1,4 +1,4 @@
-const host = 'https://659609696.xiongmaozuoye.club';
+const host = 'https://85585684.xiongmaozuoye.club';
 const weapp = `${host}/weapp`
 
 const configs = {

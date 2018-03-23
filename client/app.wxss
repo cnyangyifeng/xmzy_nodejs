@@ -29,7 +29,7 @@ page {
 
 /*= .page-bd =*/
 
-.page__bd {
+.page-bd {
   padding-bottom: 80rpx;
 }
 

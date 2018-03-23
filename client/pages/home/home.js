@@ -26,7 +26,6 @@ Page({
     this.setData({
       disciplines: disciplines
     })
-
   },
 
   /**

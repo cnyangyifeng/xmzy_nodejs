@@ -1,6 +1,7 @@
 const configs = require('../../config')
 const disciplines = require('../../services/disciplines')
 const loginService = require('../../services/loginService')
+const matchService = require('../../services/matchService')
 const msgs = require('../../msg')
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const Student = require('../../services/student')
@@ -56,22 +57,27 @@ Page({
    * 监听页面显示
    */
 
-  onShow: function () {
+  onShow: function (options) {
     // 从本地缓存中读取 student，更新页面数据 student
     this.setData({
       student: Student.get()
     })
+
     // 如果是首次访问学员，则显示 grade-selector 浮层
-    setTimeout(() => {
-      // if (!this.data.student.gradeId || this.data.student.gradeId.length === 0) {
-      if (this.data.student.firstVisit) {
-        this.setData({
-          gradeSelectorHidden: false
-        })
-      }
-    }, 6000)
+    // setTimeout(() => {
+    //   // if (!this.data.student.gradeId || this.data.student.gradeId.length === 0) {
+    //   if (this.data.student.firstVisit) {
+    //     this.setData({
+    //       gradeSelectorHidden: false
+    //     })
+    //   }
+    // }, 6000)
+
     // 从 tutor queue 中取出一个 tutor
-    this.shiftTutor()
+    // this.shiftTutor()
+
+    // 开始师生匹配
+    matchService.match(this, getApp(), options)
   },
 
   /* ================================================================================ */
@@ -138,7 +144,7 @@ Page({
       success: res => {
         const tutor = res.data.data
         console.log(tutor)
-        if (tutor && JSON.stringify(tutor) != '{}') {
+        if (tutor && JSON.stringify(tutor) !== '{}') {
           const tutorInfo = JSON.parse(tutor.tutorInfo)
           tutor.tutorInfo = tutorInfo
           this.setData({
